@@ -94,7 +94,7 @@ const token = localStorage.getItem("authToken");
 async function updateOrderStatus(orderId, newStatus) {
     try {
         const response = await fetch(
-            `http://localhost:5000/api/admin/orders/${orderId}/status`,
+            `https://cozzy-knotty-yarn.onrender.com/api/admin/orders/${orderId}/status`,
             {
                 method: "PUT",
                 headers: {
@@ -133,7 +133,7 @@ async function loadOrders() {
         message.textContent = "Loading orders...";
 
         const response = await fetch(
-            "http://localhost:5000/api/admin/orders/all",
+            "https://cozzy-knotty-yarn.onrender.com/api/admin/orders/all",
             {
                 method: "GET",
                 headers: {
