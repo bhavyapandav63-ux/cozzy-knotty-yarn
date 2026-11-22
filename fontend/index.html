@@ -8,7 +8,296 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Croissant+One&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" type="image/x-icon" href="./assets/logo.jpg">
+<style>
 
+/* ===== EXTRA RESPONSIVE FIXES ===== */
+
+/* Prevent horizontal scrolling */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+/* Keep product cards and content from overflowing */
+.product-card,
+.product-card > div {
+  min-width: 0;
+}
+
+.product-card h3,
+.product-card p {
+  overflow-wrap: anywhere;
+}
+
+/* Tablet screens */
+@media (max-width: 1023px) {
+  header nav {
+    display: none;
+  }
+
+  #home .relative.max-w-7xl {
+    gap: 3rem;
+  }
+
+  #about .max-w-6xl {
+    gap: 3rem;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 640px) {
+  /* Navbar */
+  header > div:first-child {
+    min-height: 70px;
+    height: auto;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  header a[href="#home"] {
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  header a[href="#home"] svg {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  header a[href="#home"] h1 {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  header a[href="#home"] p {
+    font-size: 7px;
+    letter-spacing: 0.08em;
+  }
+
+  /* Navbar buttons */
+  header .flex.items-center.gap-2 {
+    gap: 3px;
+    flex-shrink: 0;
+  }
+
+  header button.w-10 {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* My Orders button stays compact */
+  header a[href="my-orders.html"] {
+    padding: 8px;
+    font-size: 0;
+    white-space: nowrap;
+  }
+
+  header a[href="my-orders.html"] i {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  /* Hero section */
+  #home .relative.max-w-7xl {
+    padding-top: 40px;
+    padding-bottom: 55px;
+    gap: 45px;
+  }
+
+  #home h2 {
+    font-size: clamp(28px, 8vw, 42px);
+  }
+
+  #home .bg-\[\#FFF4BF\]\/60 {
+    padding: 16px;
+  }
+
+  #home .bg-\[\#FFF4BF\]\/60 .heading {
+    font-size: clamp(25px, 7vw, 36px);
+  }
+
+  #home .bg-\[\#FFF4BF\]\/60 svg {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+  }
+
+  /* Hero image decorations */
+  #home .relative.max-w-lg {
+    padding: 0 8px;
+  }
+
+  #home .relative.max-w-lg > div.bg-white {
+    left: 0;
+    bottom: -18px;
+    padding: 10px;
+    max-width: 85%;
+  }
+
+  #home .relative.max-w-lg > div.bg-cream {
+    right: 0;
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  /* Section headings */
+  section {
+    scroll-margin-top: 75px;
+  }
+
+  #collections,
+  #about,
+  #reviews {
+    padding-top: 55px;
+    padding-bottom: 55px;
+  }
+
+  #collections h2,
+  #about h2,
+  #reviews h2 {
+    font-size: clamp(25px, 7vw, 36px);
+  }
+
+  /* Category buttons */
+  #categories {
+    gap: 8px;
+  }
+
+  #categories button {
+    padding: 10px 15px;
+    font-size: 11px;
+  }
+
+  /* Product cards */
+  #productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .product-card {
+    border-radius: 16px;
+  }
+
+  .product-card .p-3 {
+    padding: 10px;
+  }
+
+  .product-card h3 {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .product-card .add-cart {
+    padding: 7px 9px;
+    font-size: 10px;
+  }
+
+  /* About section */
+  #about .max-w-6xl {
+    gap: 40px;
+  }
+
+  #about .grid.grid-cols-2 {
+    gap: 10px;
+  }
+
+  #about .grid.grid-cols-2 > div {
+    padding: 12px;
+  }
+
+  /* Reviews */
+  #reviews .grid {
+    gap: 14px;
+  }
+
+  #reviews article {
+    padding: 20px;
+  }
+
+  /* Footer */
+  footer .grid {
+    gap: 30px;
+  }
+
+  footer a {
+    overflow-wrap: anywhere;
+  }
+
+  /* Cart drawer */
+  #cartDrawer {
+    width: 92%;
+  }
+
+  #cartDrawer > div {
+    padding: 18px;
+  }
+
+  /* Checkout modal */
+  #checkoutModal {
+    padding: 10px;
+  }
+
+  #checkoutModal > div {
+    padding: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 22px;
+  }
+
+  #checkoutModal input,
+  #checkoutModal textarea {
+    font-size: 16px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  header a[href="#home"] h1 {
+    font-size: 9px;
+  }
+
+  header a[href="#home"] p {
+    font-size: 6px;
+  }
+
+  header .flex.items-center.gap-2 {
+    gap: 1px;
+  }
+
+  header button.w-10 {
+    width: 30px;
+    height: 30px;
+  }
+
+  #productGrid {
+    gap: 8px;
+  }
+
+  .product-card .p-3 {
+    padding: 8px;
+  }
+
+  .product-card .add-cart {
+    padding: 6px 7px;
+  }
+
+  #checkoutModal .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
 <script>
 tailwind.config = {
   theme: {
