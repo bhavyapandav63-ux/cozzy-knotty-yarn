@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozzy Knotty Yarn | Handcrafted Crochet by Bhumika Rewani</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts matching logo high-contrast serif & clean geometric sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F5E4FA',
+                        beige: '#E8C5F1',
+                        'beige-dark': '#DBAEE7',
+                        espresso: '#55125B',
+                        'espresso-light': '#6D1D74',
+                        terracotta: '#7D2A85',
+                        'terracotta-dark': '#55125B',
+                        sage: '#7A4988',
+                        sand: '#CCA0D8'
+                    },
+                    fontFamily: {
+                        logo: ['"Cinzel"', 'serif'],
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .editorial-border { border-color: rgba(85, 18, 91, 0.16); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .logo-wordmark-shadow { text-shadow: 0 3px 8px rgba(85, 18, 91, 0.22); }
+        
+        /* Desktop Mobile Frame Mode */
+        @media (min-width: 640px) {
+            body.mobile-frame-mode {
+                background-color: #DCACE8;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 4.5rem;
+                padding-bottom: 3rem;
+            }
+            body.mobile-frame-mode #app-shell {
+                width: 412px;
+                max-width: 100%;
+                border-radius: 2.75rem;
+                box-shadow: 0 30px 70px -15px rgba(85, 18, 91, 0.35), 0 0 0 10px #3B0940;
+                overflow-x: clip;
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body class="bg-cream text-espresso font-sans antialiased selection:bg-terracotta/20 selection:text-espresso mobile-frame-mode">
+
+    <!-- Top Preview Switcher Bar (Desktop Only) -->
+    <div class="hidden sm:flex fixed top-3 left-1/2 -translate-x-1/2 z-50 bg-espresso/95 backdrop-blur-md text-cream px-4 py-1.5 rounded-full shadow-xl border border-sand/30 items-center gap-3 text-xs">
+        <span class="text-sand font-medium flex items-center gap-1.5">
+            <i class="fa-solid fa-mobile-screen-button text-beige"></i> Mobile Preview
+        </span>
+        <div class="h-3.5 w-[1px] bg-cream/20"></div>
+        <button id="toggle-viewport-btn" onclick="toggleViewportMode()" class="px-2.5 py-1 rounded-full bg-terracotta text-white font-semibold hover:bg-espresso-light transition-colors">
+            Expand Full Width
+        </button>
+    </div>
+
+    <!-- Main Mobile App Container -->
+    <div id="app-shell" class="w-full min-h-screen bg-cream text-espresso relative flex flex-col">
+
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-[360px] transform translate-y-28 opacity-0 transition-all duration-300 ease-out flex items-center gap-3 bg-espresso text-cream px-4 py-3.5 rounded-2xl shadow-2xl border border-sand/30 pointer-events-none">
+            <div class="w-8 h-8 rounded-full bg-terracotta flex items-center justify-center text-white shrink-0">
+                <i class="fa-solid fa-check text-xs"></i>
+            </div>
+            <div class="min-w-0">
+                <p id="toast-title" class="font-semibold text-xs text-cream truncate">Item Added to Bag</p>
+                <p id="toast-subtitle" class="text-[11px] text-cream/80 truncate">Your shopping bag has been updated.</p>
+            </div>
+        </div>
+
+        <!-- Slide-Out Mobile Menu Drawer -->
+        <div id="mobile-menu" class="fixed inset-0 z-50 bg-espresso/60 backdrop-blur-xs hidden transition-opacity">
+            <div class="w-[82%] max-w-[320px] h-full bg-cream p-6 flex flex-col justify-between shadow-2xl">
+                <div>
+                    <div class="flex items-center justify-between pb-5 border-b editorial-border">
+                        <div class="flex items-center gap-2.5">
+                            <!-- Mini Brand Emblem SVG -->
+                            <svg class="w-9 h-9 text-espresso shrink-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 72 L78 16 C81 13 85 16 82 20 C80 22 77 21 76 19" />
+                                <path d="M50 75 C26 60 20 34 34 24 C42 18 48 24 50 30 C52 24 58 18 66 24 C80 34 74 60 50 75 Z" fill="#F5E4FA" />
+                                <path d="M36 24 C40 42 44 58 50 75" />
+                                <path d="M44 26 C48 44 52 58 56 71" />
+                                <path d="M64 24 C58 36 52 46 47 54" />
+                                <path d="M71 33 C62 43 54 51 49 58" />
+                                <path d="M29 36 C36 42 42 47 46 51" />
+                                <path d="M28 48 C35 53 42 58 48 62" />
+                                <path d="M72 45 C65 50 58 55 52 60" />
+                                <path d="M67 57 C61 61 55 65 50 68" />
+                                <path d="M65 65 C84 65 88 82 72 86 C62 88 58 92 58 96" />
+                                <path d="M65 10 L67 15 L72 17 L67 19 L65 24 L63 19 L58 17 L63 15 Z" fill="currentColor" stroke="none" />
+                                <path d="M18 34 L20 38 L24 40 L20 42 L18 46 L16 42 L12 40 L16 38 Z" fill="currentColor" stroke="none" />
+                            </svg>
+                            <div>
+                                <span class="font-logo text-base font-bold text-espresso block leading-none tracking-wide">COZZY KNOTTY YARN</span>
+                                <span class="text-[8px] tracking-[0.15em] uppercase text-terracotta font-bold mt-1 block">Handmade Gift With Full Of Love</span>
+                            </div>
+                        </div>
+                        <button id="mobile-close-btn" class="p-2.5 text-espresso hover:text-terracotta rounded-xl" aria-label="Close Menu">
+                            <i class="fa-solid fa-xmark text-xl"></i>
+                        </button>
+                    </div>
+                    <nav class="flex flex-col mt-6 space-y-1 text-base font-medium text-espresso">
+                        <a href="#home" class="mobile-link py-3 px-3 rounded-xl hover:bg-beige transition-colors flex items-center justify-between">
+                            <span>Home</span> <i class="fa-solid fa-chevron-right text-[10px] text-espresso/40"></i>
+                        </a>
+                        <a href="#collections" class="mobile-link py-3 px-3 rounded-xl hover:bg-beige transition-colors flex items-center justify-between">
+                            <span>Collections</span> <i class="fa-solid fa-chevron-right text-[10px] text-espresso/40"></i>
+                        </a>
+                        <a href="#spotlight" class="mobile-link py-3 px-3 rounded-xl hover:bg-beige transition-colors flex items-center justify-between">
+                            <span>Featured Masterpiece</span> <i class="fa-solid fa-chevron-right text-[10px] text-espresso/40"></i>
+                        </a>
+                        <a href="#story" class="mobile-link py-3 px-3 rounded-xl hover:bg-beige transition-colors flex items-center justify-between">
+                            <span>About Bhumika</span> <i class="fa-solid fa-chevron-right text-[10px] text-espresso/40"></i>
+                        </a>
+                        <a href="#reviews" class="mobile-link py-3 px-3 rounded-xl hover:bg-beige transition-colors flex items-center justify-between">
+                            <span>Community Reviews</span> <i class="fa-solid fa-chevron-right text-[10px] text-espresso/40"></i>
+                        </a>
+                    </nav>
+                </div>
+                <div class="pt-5 border-t editorial-border space-y-3">
+                    <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-espresso text-cream rounded-full text-xs font-semibold flex items-center justify-center gap-2 hover:bg-terracotta transition-colors">
+                        <i class="fa-brands fa-instagram"></i> Custom Order via DM
+                    </a>
+                    <p class="text-[11px] text-espresso/70 text-center">Handcrafted in Surat, Gujarat</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Mobile Header with Custom Logo -->
+        <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b editorial-border px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <button id="mobile-menu-btn" class="p-2 -ml-2 text-espresso hover:text-terracotta rounded-xl transition-colors" aria-label="Open Navigation">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+                <a href="#home" class="flex items-center gap-2 group">
+                    <!-- Heart Yarn & Crochet Hook Logo Emblem -->
+                    <svg class="w-9 h-9 text-espresso shrink-0 group-hover:scale-105 transition-transform" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Crochet Hook -->
+                        <path d="M21 73 L79 15 C82 12 86 15 83 19 C81 21 78 20 77 18" />
+                        <!-- Heart Yarn Ball -->
+                        <path d="M50 75 C26 60 20 34 34 24 C42 18 48 24 50 30 C52 24 58 18 66 24 C80 34 74 60 50 75 Z" fill="#F5E4FA" />
+                        <!-- Yarn Strands -->
+                        <path d="M36 24 C40 42 44 58 50 75" />
+                        <path d="M44 26 C48 44 52 58 56 71" />
+                        <path d="M64 24 C58 36 52 46 47 54" />
+                        <path d="M71 33 C62 43 54 51 49 58" />
+                        <path d="M29 36 C36 42 42 47 46 51" />
+                        <path d="M28 48 C35 53 42 58 48 62" />
+                        <path d="M72 45 C65 50 58 55 52 60" />
+                        <path d="M67 57 C61 61 55 65 50 68" />
+                        <!-- Trailing Yarn Loop -->
+                        <path d="M65 65 C84 65 88 82 72 86 C62 88 58 92 58 96" />
+                        <!-- 4-Point Sparkles -->
+                        <path d="M65 9 L67 14 L72 16 L67 18 L65 23 L63 18 L58 16 L63 14 Z" fill="currentColor" stroke="none" />
+                        <path d="M17 34 L19 38 L23 40 L19 42 L17 46 L15 42 L11 40 L15 38 Z" fill="currentColor" stroke="none" />
+                        <path d="M74 71 L75.5 74.5 L79 76 L75.5 77.5 L74 81 L72.5 77.5 L69 76 L73.2 74.5 Z" fill="currentColor" stroke="none" />
+                    </svg>
+                    <div class="block">
+                        <span class="font-logo text-[14px] font-bold tracking-wider text-espresso block leading-none logo-wordmark-shadow">COZZY KNOTTY YARN</span>
+                        <span class="text-[7.5px] tracking-[0.14em] uppercase text-espresso/75 font-bold block mt-1">HANDMADE GIFT WITH FULL OF LOVE</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-1">
+                <button onclick="toggleAdminPanel()" class="px-2.5 py-1.5 bg-terracotta text-cream rounded-full text-[9px] font-bold uppercase tracking-wider hover:bg-espresso transition-colors flex items-center gap-1" title="Private Seller & Admin Panel">
+                    <i class="fa-solid fa-lock"></i> <span>Admin</span>
+                </button>
+                <button onclick="toggleSearch()" class="p-2 text-espresso hover:text-terracotta rounded-full transition-colors" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                </button>
+                <button id="cart-btn" class="relative p-2 text-espresso hover:text-terracotta rounded-full transition-colors" aria-label="Shopping Bag">
+                    <i class="fa-solid fa-bag-shopping text-base"></i>
+                    <span id="cart-badge" class="absolute top-0.5 right-0 bg-espresso text-cream text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">0</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Private Seller & Admin Control Panel Modal -->
+        <div id="admin-modal" class="fixed inset-0 z-50 bg-espresso/80 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+            <div class="bg-cream rounded-3xl max-w-lg w-full p-6 shadow-2xl border editorial-border space-y-5 my-8 relative max-h-[90vh] overflow-y-auto">
+                <div class="flex items-center justify-between pb-4 border-b editorial-border">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-espresso text-cream flex items-center justify-center">
+                            <i class="fa-solid fa-store text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-espresso leading-none">Private Seller Control Panel</h3>
+                            <p class="text-[10px] text-espresso/65 mt-0.5">Manage catalog items, prices & private selling links</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleAdminPanel()" class="p-2 text-espresso/60 hover:text-espresso rounded-xl">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div class="flex bg-beige p-1 rounded-xl text-xs font-semibold">
+                    <button onclick="switchAdminTab('add')" id="admin-tab-add" class="flex-1 py-2.5 rounded-lg bg-espresso text-cream transition-all text-center">Add New Item</button>
+                    <button onclick="switchAdminTab('manage')" id="admin-tab-manage" class="flex-1 py-2.5 rounded-lg text-espresso hover:text-espresso transition-all text-center">Manage Prices & Stock</button>
+                </div>
+
+                <!-- Tab 1: Add New Product -->
+                <div id="admin-panel-add" class="space-y-4">
+                    <form onsubmit="handleAddNewProduct(event)" class="space-y-3.5">
+                        <div>
+                            <label class="block text-[11px] font-bold text-espresso mb-1">Crochet Item Name</label>
+                            <input type="text" id="new-item-name" required placeholder="e.g. Custom Daisy Cardigan" class="w-full px-3.5 py-2.5 bg-beige/50 border editorial-border rounded-xl text-xs text-espresso focus:outline-none focus:border-terracotta">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-espresso mb-1">Price (₹)</label>
+                                <input type="number" id="new-item-price" required placeholder="899" class="w-full px-3.5 py-2.5 bg-beige/50 border editorial-border rounded-xl text-xs text-espresso focus:outline-none focus:border-terracotta">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-espresso mb-1">Category</label>
+                                <select id="new-item-category" class="w-full px-3.5 py-2.5 bg-beige/50 border editorial-border rounded-xl text-xs text-espresso focus:outline-none focus:border-terracotta">
+                                    <option value="bouquets">Bouquets</option>
+                                    <option value="keychains">Keychains & Plush</option>
+                                    <option value="cases">Phone Cases</option>
+                                    <option value="accessories">Accessories</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-espresso mb-1">Short Description / Subtitle</label>
+                            <input type="text" id="new-item-subtitle" required placeholder="e.g. Handmade with soft cotton yarn" class="w-full px-3.5 py-2.5 bg-beige/50 border editorial-border rounded-xl text-xs text-espresso focus:outline-none focus:border-terracotta">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-bold text-espresso mb-1">Upload Item Photo</label>
+                            <input type="file" id="new-item-image-file" accept="image/*" required class="w-full text-xs text-espresso/70 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-espresso file:text-cream hover:file:bg-terracotta file:cursor-pointer">
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-espresso text-cream rounded-xl text-xs font-bold hover:bg-terracotta transition-colors shadow-md">
+                            Publish to Live Storefront
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Tab 2: Manage Existing Prices & Stock -->
+                <div id="admin-panel-manage" class="hidden space-y-3">
+                    <p class="text-xs text-espresso/70">Quickly adjust prices or remove items from your live storefront:</p>
+                    <div id="admin-product-list" class="space-y-2 max-h-[320px] overflow-y-auto pr-1">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t editorial-border flex items-center justify-between text-[11px] text-espresso/60">
+                    <span>Store ID: CozzyKnottyYarn-Surat</span>
+                    <button onclick="toggleAdminPanel()" class="font-bold text-terracotta hover:underline">Close Panel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Hero Section with Official Logo Brand Lockup -->
+        <section id="home" class="px-5 pt-7 pb-10 space-y-7">
+            <div class="space-y-4">
+                <!-- Official Logo Lockup Card matching uploaded brand identity -->
+                <div class="bg-beige/85 border editorial-border rounded-3xl p-4 shadow-xs relative overflow-hidden">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="space-y-0.5">
+                            <div class="font-logo text-[1.45rem] leading-[1.06] font-semibold tracking-[0.06em] text-espresso logo-wordmark-shadow">
+                                C<span class="relative inline-block">O<svg class="w-2.5 h-2.5 text-espresso absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8L12 2Z"/></svg></span>ZZY<br>
+                                KNOTTY<br>
+                                YARN
+                            </div>
+                        </div>
+                        <!-- Heart Yarn Ball & Hook SVG -->
+                        <svg class="w-24 h-24 text-espresso shrink-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 76 L82 12 C85 9 89 13 86 17 C84 19 81 18 80 16" />
+                            <path d="M50 76 C24 60 18 33 33 22 C41 16 48 22 50 29 C52 22 59 16 67 22 C82 33 76 60 50 76 Z" fill="#E8C5F1" />
+                            <path d="M35 22 C39 41 44 58 50 76" />
+                            <path d="M43 24 C47 43 52 58 56 72" />
+                            <path d="M65 22 C58 35 52 46 47 54" />
+                            <path d="M72 32 C62 43 54 51 49 58" />
+                            <path d="M27 35 C35 41 41 47 46 51" />
+                            <path d="M26 48 C34 53 41 58 48 63" />
+                            <path d="M73 45 C65 50 58 55 52 60" />
+                            <path d="M68 58 C61 62 55 66 50 69" />
+                            <path d="M66 65 C86 65 90 83 73 87 C62 89 58 93 58 97" />
+                            <!-- Sparkles -->
+                            <path d="M66 7 L68 13 L74 15 L68 17 L66 23 L64 17 L58 15 L64 13 Z" fill="currentColor" stroke="none" />
+                            <path d="M14 33 L16 38 L21 40 L16 42 L14 47 L12 42 L7 40 L12 38 Z" fill="currentColor" stroke="none" />
+                            <path d="M75 70 L76.8 74.2 L81 76 L76.8 77.8 L75 82 L73.2 77.8 L69 76 L73.2 74.2 Z" fill="currentColor" stroke="none" />
+                        </svg>
+                    </div>
+                    <div class="mt-2.5 pt-2 border-t editorial-border flex items-center justify-between">
+                        <span class="text-[9.5px] font-bold tracking-[0.14em] uppercase text-espresso">HANDMADE GIFT WITH FULL OF LOVE</span>
+                        <!-- Delicate Line-Art Butterfly Accent from Logo -->
+                        <svg class="w-6 h-5 text-espresso/80 shrink-0" viewBox="0 0 40 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 22 C10 14 6 6 12 4 C16 3 19 10 20 18" />
+                            <path d="M20 18 C22 10 28 5 33 9 C37 13 30 20 21 22" />
+                            <path d="M18 22 C12 22 10 27 14 29 C17 30 19 26 20 23" />
+                            <path d="M21 22 C26 23 29 28 25 30 C22 31 20 26 20 23" />
+                            <path d="M19 17 L17 12 M20 17 L22 12" />
+                        </svg>
+                    </div>
+                </div>
+
+                <h1 class="font-serif text-[2.45rem] leading-[1.06] font-bold tracking-tight text-espresso">
+                    Handcrafted Luxury, <span class="italic font-normal text-terracotta">Stitched</span> with Love.
+                </h1>
+                <p class="text-xs leading-relaxed text-espresso/80">
+                    Discover limited-edition, bespoke crochet fashion, accessories, and plush collectibles handcrafted by founder <strong class="text-espresso font-semibold">Bhumika Rewani</strong> using 100% sustainable organic cotton yarn.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex items-center gap-3 pt-1">
+                    <a href="#collections" class="flex-1 py-3.5 px-4 bg-espresso text-cream rounded-full text-xs font-semibold text-center hover:bg-terracotta transition-colors shadow-md flex items-center justify-center gap-1.5">
+                        <span>Explore Collection</span>
+                        <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                    </a>
+                    <a href="#story" class="py-3.5 px-5 bg-cream border editorial-border text-espresso rounded-full text-xs font-semibold text-center hover:bg-beige transition-colors">
+                        Meet Bhumika
+                    </a>
+                </div>
+
+                <!-- Trust Metrics Row -->
+                <div class="grid grid-cols-3 gap-2 pt-4 border-t editorial-border">
+                    <div>
+                        <span class="font-logo text-base font-bold text-espresso block leading-none">100%</span>
+                        <span class="text-[9px] uppercase tracking-wider text-espresso/70 font-semibold mt-1 block">Handmade</span>
+                    </div>
+                    <div>
+                        <span class="font-logo text-base font-bold text-espresso block leading-none">Forever</span>
+                        <span class="text-[9px] uppercase tracking-wider text-espresso/70 font-semibold mt-1 block">Blooms & Charms</span>
+                    </div>
+                    <div>
+                        <span class="font-logo text-base font-bold text-espresso block leading-none">Custom</span>
+                        <span class="text-[9px] uppercase tracking-wider text-espresso/70 font-semibold mt-1 block">Made-to-Order</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Model Showcase Slot -->
+            <div class="relative">
+                <div id="hero-showcase-card" class="w-full aspect-[4/4.6] rounded-[2rem] bg-gradient-to-b from-beige via-beige-dark/60 to-sand/50 border editorial-border shadow-xl relative overflow-hidden flex flex-col items-center justify-center p-4 text-center group">
+                    <!-- Floating Top Right Badge -->
+                    <div class="absolute top-4 right-4 z-20 bg-cream/95 backdrop-blur-xs px-3 py-2 rounded-2xl shadow-md border editorial-border flex items-center gap-2 text-left">
+                        <div class="w-6 h-6 rounded-full bg-espresso/15 text-espresso flex items-center justify-center text-[10px]">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-espresso leading-tight">Forever Crochet Blooms</p>
+                            <p class="text-[8px] text-espresso/70">Never wilts • Custom wrapped</p>
+                        </div>
+                    </div>
+
+                    <!-- One-Click Swap Photo Button for Bhumika -->
+                    <button onclick="triggerPhotoUpload('hero')" class="absolute top-4 left-4 z-20 bg-espresso/85 hover:bg-espresso text-cream text-[9px] font-bold px-2.5 py-1.5 rounded-full shadow-md flex items-center gap-1 transition-all" title="Click to upload your local photo">
+                        <i class="fa-solid fa-camera"></i> <span>Swap Photo</span>
+                    </button>
+
+                    <!-- Hero Model Photo (image_d10507.jpg) with Fallback -->
+                    <div id="hero-visual-container" class="w-full h-full flex items-center justify-center relative">
+                        <img src="image_d10507.jpg" alt="Tulip & Sunflower Gift Bag Bouquet" class="w-full h-full object-cover rounded-2xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="hidden w-full h-full items-center justify-center">
+                            <svg class="w-full h-full max-w-[310px] max-h-[340px] drop-shadow-md" viewBox="0 0 320 360" fill="none">
+                                <circle cx="160" cy="175" r="130" fill="#F5E4FA" opacity="0.65"/>
+                                <path d="M115 150 L145 230 M138 135 L155 230 M162 130 L165 230 M185 138 L175 230 M208 152 L185 230" stroke="#4F772D" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M125 185 C100 175 95 155 118 165 C128 170 132 180 125 185 Z" fill="#588157" stroke="#3A5A40" stroke-width="1.5"/>
+                                <path d="M196 185 C222 175 225 155 202 165 C192 170 188 180 196 185 Z" fill="#588157" stroke="#3A5A40" stroke-width="1.5"/>
+                                <g transform="translate(105, 132)">
+                                    <circle cx="0" cy="0" r="26" fill="#F4C430" stroke="#D4A017" stroke-width="2" stroke-dasharray="6 3"/>
+                                    <circle cx="0" cy="0" r="14" fill="#4A2511"/>
+                                </g>
+                                <path d="M122 115 C122 98 148 98 148 115 L146 138 C146 145 124 145 124 138 Z" fill="#F28482" stroke="#D65A58" stroke-width="1.5"/>
+                                <path d="M148 102 C148 84 176 84 176 102 L174 128 C174 136 150 136 150 128 Z" fill="#FAF3DD" stroke="#D8CFAF" stroke-width="1.5"/>
+                                <path d="M174 110 C174 92 202 92 202 110 L200 135 C200 143 176 143 176 135 Z" fill="#F6BD60" stroke="#D99B38" stroke-width="1.5"/>
+                                <path d="M196 124 C196 108 222 108 222 124 L220 146 C220 153 198 153 198 146 Z" fill="#84DCC6" stroke="#57B89F" stroke-width="1.5"/>
+                                <rect x="96" y="180" width="128" height="122" rx="10" fill="#F9DC5C" stroke="#E0B924" stroke-width="2"/>
+                                <path d="M96 220 L160 180 L224 220 L160 265 Z" fill="#FFF3B0" opacity="0.75"/>
+                                <path d="M96 265 L160 225 L224 265 L160 302 Z" fill="#FFF3B0" opacity="0.65"/>
+                                <path d="M135 180 C135 152 185 152 185 180" stroke="#FAF3DD" stroke-width="4" fill="none"/>
+                                <rect x="86" y="274" width="148" height="20" rx="10" fill="#55125B" opacity="0.9"/>
+                                <text x="160" y="287" text-anchor="middle" fill="#F5E4FA" font-size="8.5" font-weight="bold" font-family="Montserrat, sans-serif">TULIP &amp; SUNFLOWER GIFT BAG</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Floating Bottom Left Review Pill -->
+                    <div class="absolute bottom-4 left-4 z-20 bg-cream/95 backdrop-blur-xs px-3.5 py-2.5 rounded-2xl shadow-md border editorial-border text-left">
+                        <div class="flex text-espresso text-[9px] gap-0.5 mb-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-[10px] font-bold text-espresso leading-tight">"The stitch quality is unreal!"</p>
+                        <p class="text-[8px] text-espresso/65 mt-0.5">— Verified Collector</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hidden File Input for One-Click Real Photo Upload -->
+        <input type="file" id="global-photo-input" accept="image/*" class="hidden" onchange="handlePhotoFileSelected(event)">
+                    <div>
+        <!-- Hidden File Input for One-Click Real Photo Upload (Supports Single or Bulk Select) -->
+        <input type="file" id="global-photo-input" accept="image/*" class="hidden" onchange="handlePhotoFileSelected(event)">
+        <input type="file" id="bulk-photo-input" accept="image/*" multiple class="hidden" onchange="handleBulkPhotosSelected(event)">
+
+        <!-- 5. Hottest Picks Of The Season (Mobile 2-Column Catalog) -->
+        <section id="collections" class="px-5 py-12 space-y-6">
+            <div class="flex items-end justify-between gap-2">
+                <div>
+                    <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta block">Handcrafted Selection</span>
+                    <h2 class="font-serif text-2xl font-bold text-espresso mt-1">Hottest Picks Of The Season</h2>
+                    <p class="text-xs text-espresso/70 mt-1">Explore Bhumika's handmade forever bouquets, anime & custom keychains, crochet phone cases, and floral accessories.</p>
+                </div>
+                <button onclick="document.getElementById('bulk-photo-input').click()" class="px-3 py-2 bg-espresso text-cream rounded-full text-[9px] font-bold uppercase tracking-wider shrink-0 hover:bg-terracotta transition-colors flex items-center gap-1.5 shadow-xs" title="Select all your photos from your phone/PC at once">
+                    <i class="fa-solid fa-images"></i> Load Photos
+                </button>
+            </div>
+
+            <!-- Horizontal Scrollable Category Pills -->
+            <div id="category-filters" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+                <button onclick="filterProducts('all', this)" class="filter-pill active px-4 py-2 rounded-full text-xs font-semibold bg-espresso text-cream shrink-0 transition-colors">
+                    All Items (20)
+                </button>
+                <button onclick="filterProducts('bouquets', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-beige text-espresso hover:bg-beige-dark shrink-0 transition-colors">
+                    Bouquets
+                </button>
+                <button onclick="filterProducts('keychains', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-beige text-espresso hover:bg-beige-dark shrink-0 transition-colors">
+                    Keychains & Plush
+                </button>
+                <button onclick="filterProducts('cases', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-beige text-espresso hover:bg-beige-dark shrink-0 transition-colors">
+                    Phone Cases
+                </button>
+                <button onclick="filterProducts('accessories', this)" class="filter-pill px-4 py-2 rounded-full text-xs font-semibold bg-beige text-espresso hover:bg-beige-dark shrink-0 transition-colors">
+                    Accessories
+                </button>
+            </div>
+
+            <!-- 2-Column Mobile Product Grid -->
+            <div id="product-grid" class="grid grid-cols-2 gap-3.5">
+                <!-- Rendered via JS -->
+            </div>
+        </section>
+
+        <!-- 6. Featured Masterpiece Spotlight Section -->
+        <section id="spotlight" class="bg-beige/60 border-y editorial-border px-5 py-12 space-y-6">
+            <div class="space-y-4">
+                <!-- Main Spotlight Product Visual -->
+                <div class="relative w-full aspect-[4/4.3] rounded-3xl bg-cream border editorial-border shadow-md flex flex-col items-center justify-center p-4 text-center overflow-hidden">
+                    <span class="absolute top-3.5 left-3.5 z-20 bg-espresso text-cream text-[9px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                        Signature Bouquet
+                    </span>
+                    <button onclick="triggerPhotoUpload('spotlight')" class="absolute top-3.5 right-3.5 z-20 bg-espresso/85 hover:bg-espresso text-cream text-[9px] font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1 transition-all">
+                        <i class="fa-solid fa-camera"></i> <span>Swap Photo</span>
+                    </button>
+
+                    <div id="spotlight-visual-wrapper" class="w-full h-full flex flex-col items-center justify-center relative">
+                        <!-- Real Photo of Deluxe White Lily, Sunflower & Red Rose Bouquet (image_d101ab.jpg) with Fallback -->
+                        <img id="spotlight-img" src="image_d101ab.jpg" alt="Deluxe Lily, Sunflower & Rose Bouquet" class="w-full h-full object-cover rounded-2xl transition-transform duration-300" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="hidden w-full h-full flex-col items-center justify-center">
+                            <svg id="spotlight-svg" class="w-56 h-56 drop-shadow-md transition-transform duration-300" viewBox="0 0 260 260" fill="none">
+                                <polygon points="45,65 215,65 152,235 108,235" fill="#231F20" stroke="#3D383A" stroke-width="2"/>
+                                <polygon points="56,74 204,74 148,220 112,220" fill="#2E292B" stroke="#FFFFFF" stroke-width="1.2" stroke-opacity="0.45"/>
+                                <ellipse cx="105" cy="145" rx="22" ry="10" transform="rotate(-30 105 145)" fill="#386641"/>
+                                <ellipse cx="155" cy="145" rx="22" ry="10" transform="rotate(30 155 145)" fill="#386641"/>
+                                <g transform="translate(152, 85)">
+                                    <circle cx="0" cy="0" r="28" fill="#F6BD60" stroke="#D99B38" stroke-width="2" stroke-dasharray="5 3"/>
+                                    <circle cx="0" cy="0" r="14" fill="#4A2511"/>
+                                </g>
+                                <g transform="translate(100, 88)">
+                                    <circle cx="0" cy="0" r="20" fill="#BA181B"/>
+                                    <path d="M-10 -4 C-4 -14 10 -10 8 2 C6 12 -10 10 -8 -2" stroke="#660708" stroke-width="2.2" fill="none"/>
+                                </g>
+                                <ellipse cx="182" cy="112" rx="13" ry="16" transform="rotate(20 182 112)" fill="#7B2CBF"/>
+                                <g transform="translate(132, 128)">
+                                    <ellipse cx="0" cy="-26" rx="10" ry="24" fill="#FFFFFF" stroke="#E2DCE8" stroke-width="1.5"/>
+                                    <ellipse cx="25" cy="-8" rx="24" ry="10" transform="rotate(-15 25 -8)" fill="#FFFFFF" stroke="#E2DCE8" stroke-width="1.5"/>
+                                    <ellipse cx="-25" cy="-8" rx="24" ry="10" transform="rotate(15 -25 -8)" fill="#FFFFFF" stroke="#E2DCE8" stroke-width="1.5"/>
+                                    <ellipse cx="16" cy="20" rx="10" ry="23" transform="rotate(-35 16 20)" fill="#FFFFFF" stroke="#E2DCE8" stroke-width="1.5"/>
+                                    <ellipse cx="-16" cy="20" rx="10" ry="23" transform="rotate(35 -16 20)" fill="#FFFFFF" stroke="#E2DCE8" stroke-width="1.5"/>
+                                    <path d="M0 0 L-5 -10 M0 0 L0 -12 M0 0 L5 -10" stroke="#6A994E" stroke-width="1.8"/>
+                                    <circle cx="-5" cy="-10" r="2" fill="#F4C430"/><circle cx="0" cy="-12" r="2" fill="#F4C430"/><circle cx="5" cy="-10" r="2" fill="#F4C430"/>
+                                </g>
+                                <path d="M130 188 L108 176 L114 196 Z" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="1.5"/>
+                                <path d="M130 188 L152 176 L146 196 Z" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="1.5"/>
+                                <path d="M126 190 L114 224 M134 190 L146 224" stroke="#F8F9FA" stroke-width="4" stroke-linecap="round"/>
+                                <circle cx="130" cy="188" r="4" fill="#FFFFFF"/>
+                            </svg>
+                            <h3 id="spotlight-view-label" class="font-serif text-sm font-bold text-espresso mt-1">Deluxe Lily, Sunflower & Rose Bouquet</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Selector Row -->
+                <div class="grid grid-cols-3 gap-2.5">
+                    <button onclick="switchSpotlightView('Deluxe Bouquet View', 'fa-spa', this)" class="spotlight-thumb active py-3 px-2 rounded-2xl bg-cream border-2 border-terracotta flex flex-col items-center justify-center gap-1 transition-all">
+                        <i class="fa-solid fa-spa text-xs text-terracotta"></i>
+                        <span class="text-[9px] font-bold text-espresso">Full Bouquet</span>
+                    </button>
+                    <button onclick="switchSpotlightView('White Lily & Sunflower Macro', 'fa-sun', this)" class="spotlight-thumb py-3 px-2 rounded-2xl bg-cream border editorial-border flex flex-col items-center justify-center gap-1 transition-all">
+                        <i class="fa-solid fa-sun text-xs text-espresso/60"></i>
+                        <span class="text-[9px] font-semibold text-espresso/75">Petal Stitch</span>
+                    </button>
+                    <button onclick="switchSpotlightView('Satin Ribbon Gift Wrap', 'fa-ribbon', this)" class="spotlight-thumb py-3 px-2 rounded-2xl bg-cream border editorial-border flex flex-col items-center justify-center gap-1 transition-all">
+                        <i class="fa-solid fa-ribbon text-xs text-espresso/60"></i>
+                        <span class="text-[9px] font-semibold text-espresso/75">Gift Wrap</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Spotlight Details & Controls -->
+            <div class="space-y-4">
+                <div>
+                    <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta block">Featured Masterpiece</span>
+                    <div class="flex items-baseline justify-between gap-2 mt-1">
+                        <h2 class="font-serif text-2xl font-bold text-espresso">Deluxe Forever Bouquet</h2>
+                        <span id="spotlight-price-display" class="font-serif text-xl font-bold text-espresso">₹999</span>
+                    </div>
+                    <span class="inline-block mt-1 text-[10px] font-semibold text-sage bg-sage/15 px-2.5 py-0.5 rounded-full">
+                        Handcrafted • Custom Wrap & Stems
+                    </span>
+                </div>
+
+                <p class="text-xs text-espresso/75 leading-relaxed">
+                    A forever-blooming bouquet featuring a hand-crocheted White Lily, golden Sunflower, crimson Rose, and lavender Tulip wrapped in matte black & white Korean paper with a satin ribbon bow.
+                </p>
+
+                <!-- Interactive Bouquet Size Selector -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-espresso">Select Bundle: <span id="selected-size-label" class="text-terracotta">Deluxe (4 Stems)</span></span>
+                        <button onclick="showToast('Custom Mix Available', 'DM us on Instagram to pick your exact flowers!')" class="text-[10px] underline text-espresso/65 hover:text-terracotta">Custom Mix</button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="selectSize('Single Stem', 399, this)" class="size-pill py-2.5 px-2 rounded-xl bg-cream border editorial-border text-[10px] font-bold text-espresso hover:border-espresso transition-all">Single (₹399)</button>
+                        <button onclick="selectSize('Mini (2 Stems)', 699, this)" class="size-pill py-2.5 px-2 rounded-xl bg-cream border editorial-border text-[10px] font-bold text-espresso hover:border-espresso transition-all">Mini (₹699)</button>
+                        <button onclick="selectSize('Deluxe (4 Stems)', 999, this)" class="size-pill active py-2.5 px-2 rounded-xl bg-espresso text-cream text-[10px] font-bold transition-all">Deluxe (₹999)</button>
+                    </div>
+                </div>
+
+                <!-- Interactive Wrap Color Swatch Selector -->
+                <div class="space-y-2">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-espresso block">Select Wrap Paper: <span id="selected-color-label" class="text-terracotta">Midnight Black & White</span></span>
+                    <div class="flex items-center gap-2.5">
+                        <button onclick="selectColor('Midnight Black & White', '#231F20', this)" class="color-swatch active w-7 h-7 rounded-full bg-[#231F20] ring-2 ring-offset-2 ring-espresso transition-all" aria-label="Midnight Black"></button>
+                        <button onclick="selectColor('Pastel Blush Pink', '#F4ACB7', this)" class="color-swatch w-7 h-7 rounded-full bg-[#F4ACB7] transition-all" aria-label="Blush Pink"></button>
+                        <button onclick="selectColor('Royal Lilac', '#C77DFF', this)" class="color-swatch w-7 h-7 rounded-full bg-[#C77DFF] transition-all" aria-label="Royal Lilac"></button>
+                        <button onclick="selectColor('Rustic Kraft Jute', '#B08968', this)" class="color-swatch w-7 h-7 rounded-full bg-[#B08968] transition-all" aria-label="Rustic Kraft"></button>
+                    </div>
+                </div>
+
+                <!-- Add to Bag + Wishlist Row -->
+                <div class="flex items-center gap-2.5 pt-2">
+                    <button id="spotlight-add-btn" onclick="addSpotlightToCart()" class="flex-1 py-3.5 px-4 bg-espresso text-cream rounded-full text-xs font-semibold hover:bg-terracotta transition-colors shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>Add to Bag — ₹999</span>
+                    </button>
+                    <button id="wishlist-btn" onclick="toggleWishlist()" class="w-12 h-12 rounded-full bg-cream border editorial-border text-espresso hover:text-terracotta flex items-center justify-center transition-colors shrink-0" aria-label="Save to Wishlist">
+                        <i id="wishlist-icon" class="fa-regular fa-heart text-base"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Slow Fashion Story Section -->
+        <section id="story" class="px-5 py-12 space-y-6">
+            <!-- Founder Portrait Card -->
+            <div class="relative w-full aspect-[4/4.2] rounded-3xl bg-gradient-to-br from-beige to-sand/50 border editorial-border flex flex-col items-center justify-center p-6 text-center shadow-sm">
+                <div class="w-14 h-14 rounded-full bg-terracotta/15 text-terracotta flex items-center justify-center mb-3">
+                    <i class="fa-solid fa-user-pen text-xl"></i>
+                </div>
+                <h3 class="font-serif text-base font-bold text-espresso">Bhumika Rewani Portrait</h3>
+                <p class="text-[11px] text-espresso/65 max-w-[220px] mt-1">Founder & Lead Artisan at Cozzy Knotty Yarn Studio, Surat</p>
+                
+                <div class="absolute bottom-3.5 right-3.5 bg-cream px-3.5 py-2 rounded-2xl shadow-md border editorial-border text-left">
+                    <p class="font-serif text-xs font-bold text-espresso">Bhumika Rewani</p>
+                    <p class="text-[9px] text-terracotta font-semibold">Founder & Crochet Artist</p>
+                </div>
+            </div>
+
+            <!-- Story Text -->
+            <div class="space-y-3">
+                <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta block">The Artisan Behind The Brand</span>
+                <h2 class="font-serif text-2xl font-bold text-espresso leading-tight">
+                    Slow Fashion with Purpose: <span class="italic font-normal text-terracotta">The Cozzy Knotty Story</span>
+                </h2>
+                <p class="text-xs text-espresso/75 leading-relaxed">
+                    "Cozzy Knotty Yarn began with a simple hook, a ball of soft yarn, and a passion for creating handmade gifts full of love. From forever flower bouquets to custom character keychains and phone cases, every piece is stitched by hand to bring joy."
+                </p>
+                <p class="text-xs text-espresso/75 leading-relaxed">
+                    Founded by <strong class="text-espresso">Bhumika Rewani</strong> in Surat, every creation is customized to your favorite colors, initials, and characters—rejecting mass-produced items in favor of heartfelt, hand-stitched keepsakes.
+                </p>
+                <p class="text-xs text-espresso/75 leading-relaxed">
+                    Founded by <strong class="text-espresso">Bhumika Rewani</strong> in Surat, the brand champions zero-waste principles—rejecting mass-produced synthetic garments in favor of durable, hand-stitched heirlooms built to last for seasons.
+                </p>
+
+                <!-- 2 Feature Highlight Cards -->
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <div class="bg-beige/60 p-3.5 rounded-2xl border editorial-border space-y-1.5">
+                        <i class="fa-solid fa-wand-sparkles text-terracotta text-xs"></i>
+                        <h4 class="font-serif text-xs font-bold text-espresso">Every Stitch Matters</h4>
+                        <p class="text-[10px] text-espresso/65 leading-snug">Zero machinery—100% hand-crocheted with precision.</p>
+                    </div>
+                    <div class="bg-beige/60 p-3.5 rounded-2xl border editorial-border space-y-1.5">
+                        <i class="fa-solid fa-leaf text-sage text-xs"></i>
+                        <h4 class="font-serif text-xs font-bold text-espresso">Sustainable Luxury</h4>
+                        <p class="text-[10px] text-espresso/65 leading-snug">Ethically sourced cotton & low-impact dyes.</p>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-espresso hover:text-terracotta transition-colors">
+                        <i class="fa-brands fa-instagram text-terracotta"></i>
+                        <span>Follow Bhumika on Instagram</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Community Feedback Section -->
+        <section id="reviews" class="bg-beige/50 border-y editorial-border py-12 space-y-6">
+            <div class="px-5 text-center">
+                <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta block">Community Feedback</span>
+                <h2 class="font-serif text-2xl font-bold text-espresso mt-1">Loved By Our Community</h2>
+                <p class="text-xs text-espresso/65 mt-1">Real experiences from lovers of our handcrafted crochet collection.</p>
+            </div>
+
+            <!-- Horizontal Swipeable Review Cards -->
+            <div class="flex gap-3.5 overflow-x-auto no-scrollbar px-5 pb-2 snap-x snap-mandatory">
+                <!-- Review 1 -->
+                <div class="min-w-[270px] max-w-[270px] snap-center bg-cream p-5 rounded-3xl border editorial-border shadow-xs flex flex-col justify-between space-y-4">
+                    <div class="space-y-2.5">
+                        <div class="flex text-terracotta text-[10px] gap-0.5">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-espresso/80 italic leading-relaxed">
+                            "Ordered the Rainbow Tulip & Sunflower bouquet from Cozzy Knotty Yarn and it looks even prettier in person! The stitching is so neat and it never wilts."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2.5 pt-2 border-t editorial-border">
+                        <div class="w-8 h-8 rounded-full bg-beige text-espresso font-serif font-bold text-xs flex items-center justify-center">RS</div>
+                        <div>
+                            <p class="text-xs font-bold text-espresso">Riya Sharma</p>
+                            <p class="text-[9px] text-espresso/60">Verified Buyer • Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="min-w-[270px] max-w-[270px] snap-center bg-cream p-5 rounded-3xl border editorial-border shadow-xs flex flex-col justify-between space-y-4">
+                    <div class="space-y-2.5">
+                        <div class="flex text-terracotta text-[10px] gap-0.5">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-espresso/80 italic leading-relaxed">
+                            "Got the custom Virat #18 jersey keychain and Spidey crochet phone cover—everyone keeps asking where I got them! Bhumika nailed every single detail."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2.5 pt-2 border-t editorial-border">
+                        <div class="w-8 h-8 rounded-full bg-beige text-espresso font-serif font-bold text-xs flex items-center justify-center">TM</div>
+                        <div>
+                            <p class="text-xs font-bold text-espresso">Tanvi Mehta</p>
+                            <p class="text-[9px] text-espresso/60">Verified Buyer • Surat</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="min-w-[270px] max-w-[270px] snap-center bg-cream p-5 rounded-3xl border editorial-border shadow-xs flex flex-col justify-between space-y-4">
+                    <div class="space-y-2.5">
+                        <div class="flex text-terracotta text-[10px] gap-0.5">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-espresso/80 italic leading-relaxed">
+                            "The red rose ghungroo anklets and tulip claw clip are pure magic! So lightweight, comfortable, and packed with so much care."
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2.5 pt-2 border-t editorial-border">
+                        <div class="w-8 h-8 rounded-full bg-beige text-espresso font-serif font-bold text-xs flex items-center justify-center">AP</div>
+                        <div>
+                            <p class="text-xs font-bold text-espresso">Ananya Patel</p>
+                            <p class="text-[9px] text-espresso/60">Verified Buyer • Bengaluru</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Follow Our Journey @cozzyknottyyarn (2x2 Mobile Instagram Grid) -->
+        <section class="px-5 py-12 space-y-5">
+            <div class="flex items-end justify-between">
+                <div>
+                    <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta block">Follow Our Journey</span>
+                    <h2 class="font-serif text-xl font-bold text-espresso mt-0.5">@cozzy_knotty_yarn___</h2>
+                </div>
+                <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-espresso hover:text-terracotta underline">
+                    View Instagram
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="aspect-square rounded-2xl bg-beige border editorial-border relative overflow-hidden flex flex-col items-center justify-center p-4 text-center group hover:border-terracotta transition-all">
+                    <img src="image_d0fa61.jpg" alt="Rainbow Tulip Bouquet" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'">
+                    <div class="relative z-10 bg-cream/90 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border editorial-border">
+                        <span class="text-[10px] font-bold text-espresso block">Rainbow Tulips</span>
+                        <span class="text-[8px] text-terracotta font-semibold">10-stem bundle</span>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="aspect-square rounded-2xl bg-beige border editorial-border relative overflow-hidden flex flex-col items-center justify-center p-4 text-center group hover:border-terracotta transition-all">
+                    <img src="image_d1052b.jpg" alt="Anime Keychains" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'">
+                    <div class="relative z-10 bg-cream/90 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border editorial-border">
+                        <span class="text-[10px] font-bold text-espresso block">Anime Keychains</span>
+                        <span class="text-[8px] text-terracotta font-semibold">Doraemon & Shinchan</span>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="aspect-square rounded-2xl bg-beige border editorial-border relative overflow-hidden flex flex-col items-center justify-center p-4 text-center group hover:border-terracotta transition-all">
+                    <img src="image_d0f6c2.jpg" alt="Rose Ghungroo Anklets" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'">
+                    <div class="relative z-10 bg-cream/90 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border editorial-border">
+                        <span class="text-[10px] font-bold text-espresso block">Rose Anklets</span>
+                        <span class="text-[8px] text-terracotta font-semibold">Ghungroo bells</span>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="aspect-square rounded-2xl bg-beige border editorial-border relative overflow-hidden flex flex-col items-center justify-center p-4 text-center group hover:border-terracotta transition-all">
+                    <img src="image_d0fa05.jpg" alt="Custom Phone Covers" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none'">
+                    <div class="relative z-10 bg-cream/90 backdrop-blur-xs px-2.5 py-1.5 rounded-xl border editorial-border">
+                        <span class="text-[10px] font-bold text-espresso block">Phone Covers</span>
+                        <span class="text-[8px] text-terracotta font-semibold">Spidey & Initials</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 10. Deep Plum Newsletter & Footer -->
+        <footer class="bg-espresso text-cream mt-auto">
+            <!-- Newsletter Section -->
+            <div class="px-5 py-12 text-center space-y-4 border-b border-cream/15">
+                <span class="text-[9px] font-bold uppercase tracking-[0.2em] text-beige block">Join Our Craft Club</span>
+                <h2 class="font-logo text-xl font-bold tracking-wide text-cream">Join Our Community</h2>
+                <p class="text-xs text-cream/80 max-w-xs mx-auto leading-relaxed">
+                    Subscribe for early access to limited crochet drops, free knitting patterns, and behind-the-scenes stories from Bhumika's workshop.
+                </p>
+                <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-2.5 max-w-sm mx-auto pt-2">
+                    <input type="email" id="newsletter-email" required placeholder="Enter your email address" class="flex-1 px-4 py-3 rounded-full bg-cream/10 border border-cream/25 text-xs text-cream placeholder:text-cream/55 focus:outline-none focus:border-beige">
+                    <button type="submit" class="px-6 py-3 rounded-full bg-beige text-espresso font-bold text-xs hover:bg-cream transition-colors shrink-0">
+                        Subscribe
+                    </button>
+                </form>
+                <p class="text-[9px] text-cream/55">No spam, ever. Unsubscribe anytime.</p>
+            </div>
+
+            <!-- Footer Links & Info -->
+            <div class="px-5 py-10 space-y-8">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-9 h-9 text-beige shrink-0" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 73 L79 15 C82 12 86 15 83 19 C81 21 78 20 77 18" />
+                            <path d="M50 75 C26 60 20 34 34 24 C42 18 48 24 50 30 C52 24 58 18 66 24 C80 34 74 60 50 75 Z" fill="#55125B" />
+                            <path d="M36 24 C40 42 44 58 50 75" />
+                            <path d="M44 26 C48 44 52 58 56 71" />
+                            <path d="M64 24 C58 36 52 46 47 54" />
+                            <path d="M71 33 C62 43 54 51 49 58" />
+                            <path d="M29 36 C36 42 42 47 46 51" />
+                            <path d="M28 48 C35 53 42 58 48 62" />
+                            <path d="M72 45 C65 50 58 55 52 60" />
+                            <path d="M67 57 C61 61 55 65 50 68" />
+                            <path d="M65 65 C84 65 88 82 72 86 C62 88 58 92 58 96" />
+                            <path d="M65 9 L67 14 L72 16 L67 18 L65 23 L63 18 L58 16 L63 14 Z" fill="currentColor" stroke="none" />
+                        </svg>
+                        <div>
+                            <span class="font-logo text-base font-bold tracking-wider text-cream block leading-none">COZZY KNOTTY YARN</span>
+                            <span class="text-[8px] tracking-[0.15em] uppercase text-beige font-semibold block mt-1">HANDMADE GIFT WITH FULL OF LOVE</span>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-cream/75 leading-relaxed">
+                        Handcrafted luxury crochet fashion and accessories made with organic cotton yarn. Founded & curated by Bhumika Rewani in Surat, India.
+                    </p>
+                    <div class="flex items-center gap-3 pt-1">
+                        <a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-cream/10 flex items-center justify-center text-xs hover:bg-beige hover:text-espresso transition-colors" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#collections" class="w-8 h-8 rounded-full bg-cream/10 flex items-center justify-center text-xs hover:bg-beige hover:text-espresso transition-colors" aria-label="Shop">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 text-xs">
+                    <div class="space-y-2">
+                        <h4 class="text-[10px] font-bold uppercase tracking-wider text-beige">Explore</h4>
+                        <ul class="space-y-1.5 text-[11px] text-cream/75">
+                            <li><a href="#home" class="hover:text-beige transition-colors">Home</a></li>
+                            <li><a href="#collections" class="hover:text-beige transition-colors">Shop Collection</a></li>
+                            <li><a href="#spotlight" class="hover:text-beige transition-colors">Featured Piece</a></li>
+                            <li><a href="#story" class="hover:text-beige transition-colors">Our Story</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="text-[10px] font-bold uppercase tracking-wider text-beige">Workshop</h4>
+                        <ul class="space-y-1.5 text-[11px] text-cream/75">
+                            <li>Surat, Gujarat, India</li>
+                            <li>Made to order (5–7 days)</li>
+                            <li><a href="https://www.instagram.com/cozzy_knotty_yarn__?utm_source=ig_web_button_share_sheet&gwpx=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" class="text-beige underline">@cozzy_knotty_yarn___</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="pt-6 border-t border-cream/15 flex flex-col gap-2 text-[10px] text-cream/55 text-center">
+                    <span>© 2026 Cozzy Knotty Yarn. All rights reserved. Designed for Bhumika Rewani.</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Complete Product Catalog mapped directly to Bhumika's uploaded image files
+        const products = [
+            // --- BOUQUETS ---
+            {
+                id: 'rainbow-tulips',
+                image: 'image_d0fa61.jpg',
+                name: 'Rainbow Tulip Bouquet',
+                subtitle: '10-Stem Pastel & Bright Tulips',
+                price: 899,
+                category: 'bouquets',
+                badge: 'BESTSELLER',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#F28482', '#F6BD60', '#84DCC6', '#FAF3DD'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <path d="M40 55 L56 105 M52 45 L60 105 M68 45 L62 105 M80 55 L66 105" stroke="#4F772D" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="45" cy="82" rx="11" ry="5" transform="rotate(-35 45 82)" fill="#588157"/>
+                    <ellipse cx="75" cy="82" rx="11" ry="5" transform="rotate(35 75 82)" fill="#588157"/>
+                    <rect x="30" y="42" width="16" height="22" rx="8" fill="#F28482"/>
+                    <rect x="44" y="30" width="16" height="24" rx="8" fill="#F6BD60"/>
+                    <rect x="60" y="32" width="16" height="24" rx="8" fill="#E63946"/>
+                    <rect x="74" y="44" width="16" height="22" rx="8" fill="#F4ACB7"/>
+                    <rect x="52" y="48" width="16" height="23" rx="8" fill="#72EFDD"/>
+                </svg>`
+            },
+            {
+                id: 'sunflower-lily-bouquet',
+                image: 'image_d101ab.jpg',
+                name: 'Sunflower & Lily Bouquet',
+                subtitle: 'White Lily, Rose & Sunflower',
+                price: 999,
+                category: 'bouquets',
+                badge: 'SIGNATURE',
+                badgeColor: 'bg-terracotta text-cream',
+                swatches: ['#FFFFFF', '#F6BD60', '#BA181B', '#231F20'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <polygon points="24,30 96,30 68,108 52,108" fill="#231F20"/>
+                    <circle cx="70" cy="40" r="14" fill="#F6BD60" stroke="#D99B38" stroke-width="1.5" stroke-dasharray="3 2"/>
+                    <circle cx="70" cy="40" r="7" fill="#4A2511"/>
+                    <circle cx="46" cy="42" r="10" fill="#BA181B"/>
+                    <g transform="translate(60, 60)">
+                        <ellipse cx="0" cy="-12" rx="5" ry="12" fill="#FFF"/>
+                        <ellipse cx="12" cy="-3" rx="12" ry="5" fill="#FFF"/>
+                        <ellipse cx="-12" cy="-3" rx="12" ry="5" fill="#FFF"/>
+                        <ellipse cx="8" cy="10" rx="5" ry="11" transform="rotate(-35 8 10)" fill="#FFF"/>
+                        <ellipse cx="-8" cy="10" rx="5" ry="11" transform="rotate(35 -8 10)" fill="#FFF"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#F4C430"/>
+                    </g>
+                    <path d="M52 86 L68 86" stroke="#FFF" stroke-width="3" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 'evileye-daisy-bouquet',
+                image: 'image_d1018d.jpg',
+                name: 'Evil Eye & Daisy Bouquet',
+                subtitle: 'Protective Nazar Bloom & Daisies',
+                price: 799,
+                category: 'bouquets',
+                badge: 'TRENDING',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#023E8A', '#48CAE4', '#FFD166', '#F4ACB7'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <polygon points="22,24 98,24 68,108 52,108" fill="#FAD2E1" stroke="#F4ACB7" stroke-width="1.5"/>
+                    <circle cx="64" cy="44" r="18" fill="#023E8A"/>
+                    <circle cx="64" cy="44" r="11" fill="#48CAE4"/>
+                    <circle cx="64" cy="44" r="6" fill="#FFFFFF"/>
+                    <circle cx="64" cy="44" r="3" fill="#FFD166"/>
+                    <circle cx="38" cy="36" r="7" fill="#FFD166"/><circle cx="38" cy="36" r="2.5" fill="#582F0E"/>
+                    <circle cx="36" cy="50" r="7" fill="#FFD166"/><circle cx="36" cy="50" r="2.5" fill="#582F0E"/>
+                    <path d="M50 86 L70 86" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 'red-cream-roses',
+                image: 'image_d0f6e1.jpg',
+                name: 'Classic Red & Cream Roses',
+                subtitle: 'Hand-Rolled 9-Rose Bouquet',
+                price: 849,
+                category: 'bouquets',
+                badge: '',
+                badgeColor: '',
+                swatches: ['#9B111E', '#FFF8E7', '#386641'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <path d="M45 65 L60 106 M60 55 L60 106 M75 65 L60 106" stroke="#386641" stroke-width="3.5" stroke-linecap="round"/>
+                    <circle cx="52" cy="34" r="11" fill="#FFF8E7" stroke="#E6CCB2" stroke-width="1.5"/>
+                    <circle cx="72" cy="36" r="12" fill="#FFF8E7" stroke="#E6CCB2" stroke-width="1.5"/>
+                    <circle cx="46" cy="52" r="12" fill="#9B111E"/>
+                    <circle cx="74" cy="58" r="13" fill="#9B111E"/>
+                    <circle cx="36" cy="70" r="10" fill="#FFF8E7" stroke="#E6CCB2" stroke-width="1.5"/>
+                </svg>`
+            },
+            {
+                id: 'golden-sunflower',
+                image: 'image_d0f9c5.jpg',
+                name: 'Golden Wrapped Sunflower',
+                subtitle: 'Single Giant Sunflower Wrap',
+                price: 449,
+                category: 'bouquets',
+                badge: '',
+                badgeColor: '',
+                swatches: ['#F4C430', '#4A2511', '#D4A373'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <polygon points="24,28 96,28 68,106 52,106" fill="#E6CCB2" stroke="#DDB892" stroke-width="1.5"/>
+                    <circle cx="60" cy="52" r="24" fill="#F4C430" stroke="#E09F3E" stroke-width="2" stroke-dasharray="5 2.5"/>
+                    <circle cx="60" cy="52" r="12" fill="#4A2511"/>
+                    <path d="M52 88 L68 88" stroke="#6F1D1B" stroke-width="3" stroke-linecap="round"/>
+                </svg>`
+            },
+            {
+                id: 'single-red-rose',
+                image: 'image_d0f9a5.jpg',
+                name: 'Single Wrapped Red Rose',
+                subtitle: 'Rustic Burlap & Script Wrap',
+                price: 349,
+                category: 'bouquets',
+                badge: 'GIFT FAVORITE',
+                badgeColor: 'bg-terracotta text-cream',
+                swatches: ['#9B111E', '#B08968', '#386641'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <polygon points="36,24 84,24 66,108 54,108" fill="#C89F74" stroke="#9C6644" stroke-width="1.5"/>
+                    <path d="M60 52 L60 95" stroke="#386641" stroke-width="3"/>
+                    <ellipse cx="68" cy="68" rx="8" ry="4" transform="rotate(-30 68 68)" fill="#386641"/>
+                    <circle cx="56" cy="46" r="14" fill="#9B111E"/>
+                    <path d="M50 44 C54 38 62 40 60 48 C58 53 50 51 52 45" stroke="#590D22" stroke-width="1.8" fill="none"/>
+                </svg>`
+            },
+            {
+                id: 'blue-lily-bouquet',
+                image: 'image_d0f2a1.jpg',
+                name: 'Royal Blue Lily Bouquet',
+                subtitle: 'Two-Tone Azure & Navy Lily',
+                price: 549,
+                category: 'bouquets',
+                badge: '',
+                badgeColor: '',
+                swatches: ['#0096C7', '#03045E', '#FFFFFF'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <polygon points="24,22 96,22 68,108 52,108" fill="#F8F9FA" stroke="#DEE2E6" stroke-width="1.5"/>
+                    <g transform="translate(60, 54)">
+                        <ellipse cx="0" cy="-16" rx="6" ry="15" fill="#48CAE4" stroke="#03045E" stroke-width="1.8"/>
+                        <ellipse cx="15" cy="-4" rx="15" ry="6" fill="#48CAE4" stroke="#03045E" stroke-width="1.8"/>
+                        <ellipse cx="-15" cy="-4" rx="15" ry="6" fill="#48CAE4" stroke="#03045E" stroke-width="1.8"/>
+                        <ellipse cx="10" cy="13" rx="6" ry="14" transform="rotate(-35 10 13)" fill="#48CAE4" stroke="#03045E" stroke-width="1.8"/>
+                        <ellipse cx="-10" cy="13" rx="6" ry="14" transform="rotate(35 -10 13)" fill="#48CAE4" stroke="#03045E" stroke-width="1.8"/>
+                        <circle cx="0" cy="0" r="3" fill="#FFD166"/>
+                    </g>
+                </svg>`
+            },
+
+            // --- KEYCHAINS & PLUSHIES ---
+            {
+                id: 'doraemon-keychain',
+                image: 'image_d1052b.jpg',
+                name: 'Doraemon Amigurumi Keychain',
+                subtitle: 'Pocket-Sized Gadget Cat Plush',
+                price: 399,
+                category: 'keychains',
+                badge: 'BESTSELLER',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#0077B6', '#FFFFFF', '#D62828'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <circle cx="60" cy="78" r="16" fill="#0077B6"/>
+                    <circle cx="44" cy="74" r="6" fill="#FFFFFF"/><circle cx="76" cy="74" r="6" fill="#FFFFFF"/>
+                    <ellipse cx="52" cy="94" rx="7" ry="5" fill="#FFFFFF"/><ellipse cx="68" cy="94" rx="7" ry="5" fill="#FFFFFF"/>
+                    <rect x="48" y="64" width="24" height="4" rx="2" fill="#D62828"/>
+                    <circle cx="60" cy="67" r="3.5" fill="#F4C430"/>
+                    <circle cx="60" cy="46" r="22" fill="#0077B6"/>
+                    <ellipse cx="60" cy="50" rx="17" ry="15" fill="#FFFFFF"/>
+                    <circle cx="54" cy="39" r="4" fill="#1D1E2C"/><circle cx="66" cy="39" r="4" fill="#1D1E2C"/>
+                    <circle cx="60" cy="46" r="3.5" fill="#D62828"/>
+                    <path d="M60 50 L60 58 M47 50 L55 52 M47 55 L55 55 M73 50 L65 52 M73 55 L65 55" stroke="#1D1E2C" stroke-width="1.2"/>
+                </svg>`
+            },
+            {
+                id: 'shinchan-keychain',
+                image: 'image_d0fa9f.jpg',
+                name: 'Shinchan Amigurumi Keychain',
+                subtitle: 'Red Tee & Yellow Shorts Doll',
+                price: 449,
+                category: 'keychains',
+                badge: 'FAN FAVORITE',
+                badgeColor: 'bg-terracotta text-cream',
+                swatches: ['#D62828', '#F4C430', '#1D1E2C'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <rect x="47" y="58" width="26" height="20" rx="6" fill="#D62828"/>
+                    <rect x="49" y="77" width="10" height="11" rx="3" fill="#F4C430"/>
+                    <rect x="61" y="77" width="10" height="11" rx="3" fill="#F4C430"/>
+                    <rect x="50" y="88" width="8" height="7" rx="3" fill="#F4C430"/>
+                    <rect x="62" y="88" width="8" height="7" rx="3" fill="#F4C430"/>
+                    <circle cx="60" cy="40" r="19" fill="#F7CAD0"/>
+                    <path d="M42 35 C42 20 78 20 78 35 C74 29 46 29 42 35 Z" fill="#1D1E2C"/>
+                    <path d="M47 34 Q52 31 56 34 M64 34 Q68 31 73 34" stroke="#1D1E2C" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+                    <circle cx="52" cy="41" r="3" fill="#1D1E2C"/><circle cx="68" cy="41" r="3" fill="#1D1E2C"/>
+                    <circle cx="60" cy="49" r="2.5" fill="#D62828"/>
+                </svg>`
+            },
+            {
+                id: 'virat-jersey-keychain',
+                image: 'image_d101ca.jpg',
+                name: 'Virat #18 Jersey & Bat Charm',
+                subtitle: 'RCB #18 Mini Kit, Bat & Ball',
+                price: 449,
+                category: 'keychains',
+                badge: 'CRICKET EDITION',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#03045E', '#D62828', '#F4C430'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <circle cx="60" cy="22" r="8" stroke="#999" stroke-width="2" fill="none"/>
+                    <rect x="28" y="34" width="9" height="34" rx="4" transform="rotate(32 28 34)" fill="#F5EBE0" stroke="#D5BDAF" stroke-width="1.5"/>
+                    <circle cx="54" cy="34" r="5" fill="#BA181B"/>
+                    <path d="M42 46 L78 46 L86 58 L77 63 L75 84 L45 84 L43 63 L34 58 Z" fill="#03045E"/>
+                    <rect x="45" y="65" width="30" height="19" fill="#D62828"/>
+                    <text x="60" y="62" text-anchor="middle" fill="#F4C430" font-size="11" font-weight="bold">18</text>
+                    <text x="60" y="77" text-anchor="middle" fill="#F4C430" font-size="7.5" font-weight="bold">VIRAT</text>
+                </svg>`
+            },
+            {
+                id: 'luffy-keychain',
+                image: 'image_d10128.jpg',
+                name: 'Luffy Straw Hat Keychain',
+                subtitle: 'Anime Pirate Amigurumi Doll',
+                price: 499,
+                category: 'keychains',
+                badge: 'ANIME DROP',
+                badgeColor: 'bg-terracotta text-cream',
+                swatches: ['#D4A373', '#D62828', '#023E8A'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <rect x="48" y="58" width="24" height="18" rx="4" fill="#D62828"/>
+                    <rect x="49" y="75" width="10" height="15" rx="3" fill="#023E8A"/>
+                    <rect x="61" y="75" width="10" height="15" rx="3" fill="#023E8A"/>
+                    <circle cx="60" cy="42" r="16" fill="#F5EBE0"/>
+                    <ellipse cx="60" cy="29" rx="25" ry="7" fill="#D4A373" stroke="#B08968" stroke-width="1.5"/>
+                    <path d="M45 29 C45 18 75 18 75 29 Z" fill="#D4A373"/>
+                    <rect x="45" y="26" width="30" height="3" fill="#D62828"/>
+                    <circle cx="54" cy="42" r="2.8" fill="#1D1E2C"/><circle cx="66" cy="42" r="2.8" fill="#1D1E2C"/>
+                </svg>`
+            },
+            {
+                id: 'monkey-banana-keychain',
+                image: 'image_d10224.jpg',
+                name: 'Monkey & Banana Keychain',
+                subtitle: 'Cute Choco Monkey Holding Banana',
+                price: 399,
+                category: 'keychains',
+                badge: '',
+                badgeColor: '',
+                swatches: ['#4A2511', '#F5EBE0', '#F4C430'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <circle cx="60" cy="75" r="17" fill="#4A2511"/>
+                    <circle cx="42" cy="42" r="7" fill="#4A2511"/><circle cx="78" cy="42" r="7" fill="#4A2511"/>
+                    <circle cx="60" cy="44" r="18" fill="#4A2511"/>
+                    <ellipse cx="60" cy="46" rx="13" ry="11" fill="#F5EBE0"/>
+                    <circle cx="54" cy="43" r="3" fill="#1D1E2C"/><circle cx="66" cy="43" r="3" fill="#1D1E2C"/>
+                    <path d="M62 72 Q74 62 78 72 Q72 80 62 72 Z" fill="#F4C430"/>
+                    <circle cx="48" cy="88" r="6" fill="#F5EBE0"/><circle cx="72" cy="88" r="6" fill="#F5EBE0"/>
+                </svg>`
+            },
+            {
+                id: 'santa-keychain',
+                image: 'image_d0fa81.jpg',
+                name: 'Mini Santa Claus Keychain',
+                subtitle: 'Festive Holiday Plush Charm',
+                price: 399,
+                category: 'keychains',
+                badge: 'FESTIVE',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#D62828', '#FFFFFF', '#1D1E2C'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <rect x="45" y="58" width="30" height="28" rx="8" fill="#D62828"/>
+                    <rect x="45" y="69" width="30" height="4" fill="#1D1E2C"/>
+                    <circle cx="60" cy="42" r="17" fill="#F5EBE0"/>
+                    <path d="M44 42 C44 60 76 60 76 42" fill="#FFFFFF"/>
+                    <path d="M44 33 L60 16 L76 33 Z" fill="#D62828"/>
+                    <rect x="43" y="31" width="34" height="5" rx="2.5" fill="#FFFFFF"/>
+                    <circle cx="54" cy="40" r="2.8" fill="#1D1E2C"/><circle cx="66" cy="40" r="2.8" fill="#1D1E2C"/>
+                </svg>`
+            },
+            {
+                id: 'chef-cutie-keychain',
+                image: 'image_d0fa21.jpg',
+                name: 'Custom Name Chef Cutie',
+                subtitle: 'Personalized Beaded Name Charm',
+                price: 499,
+                category: 'keychains',
+                badge: 'CUSTOM NAME',
+                badgeColor: 'bg-terracotta text-cream',
+                swatches: ['#FFFFFF', '#F7CAD0', '#1D1E2C'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <rect x="48" y="60" width="24" height="24" rx="5" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="1.5"/>
+                    <circle cx="60" cy="44" r="15" fill="#F7CAD0"/>
+                    <ellipse cx="60" cy="25" rx="18" ry="9" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="1.5"/>
+                    <circle cx="55" cy="44" r="2.6" fill="#1D1E2C"/><circle cx="65" cy="44" r="2.6" fill="#1D1E2C"/>
+                    <rect x="78" y="45" width="7" height="36" rx="2" fill="#FFFFFF" stroke="#1D1E2C" stroke-width="1"/>
+                </svg>`
+            },
+            {
+                id: 'couple-ghost-keychains',
+                image: 'image_d10247.jpg',
+                name: 'Couple Glasses Octopus Charms',
+                subtitle: 'Set of 2 Matching Keychains',
+                price: 449,
+                category: 'keychains',
+                badge: 'PAIR SET',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#1D1E2C', '#FFFFFF', '#F4ACB7', '#D62828'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <path d="M26 68 C26 48 54 48 54 68 L56 80 L48 77 L40 81 L32 77 L24 80 Z" fill="#1D1E2C"/>
+                    <circle cx="35" cy="63" r="5" stroke="#D62828" stroke-width="2" fill="none"/>
+                    <circle cx="45" cy="63" r="5" stroke="#D62828" stroke-width="2" fill="none"/>
+                    <path d="M66 68 C66 48 94 48 94 68 L96 80 L88 77 L80 81 L72 77 L64 80 Z" fill="#FFFFFF" stroke="#DEE2E6" stroke-width="1.5"/>
+                    <circle cx="75" cy="63" r="5" stroke="#F4ACB7" stroke-width="2" fill="none"/>
+                    <circle cx="85" cy="63" r="5" stroke="#F4ACB7" stroke-width="2" fill="none"/>
+                </svg>`
+            },
+
+            // --- PHONE CASES ---
+            {
+                id: 'spidey-phone-case',
+                image: 'image_d0fa05.jpg',
+                name: 'Spidey Web Crochet Case',
+                subtitle: 'Custom Fit Any Phone Model',
+                price: 699,
+                category: 'cases',
+                badge: 'VIRAL PICK',
+                badgeColor: 'bg-terracotta text-cream',
+                swatches: ['#BA181B', '#1D1E2C', '#FFFFFF'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <rect x="36" y="16" width="48" height="88" rx="12" fill="#BA181B" stroke="#800F2F" stroke-width="2"/>
+                    <rect x="42" y="23" width="16" height="18" rx="5" fill="#F5E4FA"/>
+                    <path d="M68 16 L68 104 M36 60 L84 60 M42 35 L84 85 M84 35 L36 85" stroke="#1D1E2C" stroke-width="1.5"/>
+                    <ellipse cx="49" cy="60" rx="7" ry="11" transform="rotate(-18 49 60)" fill="#FFFFFF" stroke="#1D1E2C" stroke-width="2.5"/>
+                    <ellipse cx="71" cy="60" rx="7" ry="11" transform="rotate(18 71 60)" fill="#FFFFFF" stroke="#1D1E2C" stroke-width="2.5"/>
+                </svg>`
+            },
+            {
+                id: 'monogram-phone-case',
+                image: 'image_d0f285.jpg',
+                name: 'Custom Initials Monogram Case',
+                subtitle: '3D Raised Yarn Letters Cover',
+                price: 649,
+                category: 'cases',
+                badge: 'CUSTOMIZE',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#1D1E2C', '#FAF3DD', '#7D2A85'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <rect x="36" y="16" width="48" height="88" rx="12" fill="#1D1E2C"/>
+                    <rect x="42" y="23" width="17" height="17" rx="5" fill="#F5E4FA"/>
+                    <text x="60" y="72" text-anchor="middle" fill="#FAF3DD" font-size="18" font-weight="bold" font-family="Montserrat, sans-serif">MG</text>
+                </svg>`
+            },
+
+            // --- ACCESSORIES ---
+            {
+                id: 'rose-ghungroo-anklet',
+                image: 'image_d0f6c2.jpg',
+                name: 'Rose & Ghungroo Crochet Anklet',
+                subtitle: 'Crimson Roses & Golden Bells',
+                price: 399,
+                category: 'accessories',
+                badge: 'HANDCRAFTED',
+                badgeColor: 'bg-terracotta text-cream',
+                swatches: ['#800F2F', '#386641', '#F4C430'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <path d="M24 72 Q60 92 96 52" stroke="#386641" stroke-width="5" stroke-linecap="round" fill="none"/>
+                    <circle cx="34" cy="76" r="7" fill="#800F2F"/>
+                    <circle cx="52" cy="80" r="7.5" fill="#800F2F"/>
+                    <circle cx="70" cy="74" r="7" fill="#800F2F"/>
+                    <circle cx="86" cy="61" r="6.5" fill="#800F2F"/>
+                    <circle cx="43" cy="82" r="3" fill="#F4C430"/><circle cx="62" cy="81" r="3" fill="#F4C430"/><circle cx="79" cy="70" r="3" fill="#F4C430"/>
+                </svg>`
+            },
+            {
+                id: 'floral-hair-claw',
+                image: 'image_d0f607.jpg',
+                name: 'Tulip & Sunflower Hair Claw Clip',
+                subtitle: 'Yarn-Wrapped Aesthetic Claw',
+                price: 299,
+                category: 'accessories',
+                badge: 'CUTE PICK',
+                badgeColor: 'bg-espresso text-cream',
+                swatches: ['#F28482', '#F4C430', '#386641'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <rect x="46" y="48" width="28" height="44" rx="10" fill="none" stroke="#386641" stroke-width="5"/>
+                    <path d="M60 48 L60 32" stroke="#386641" stroke-width="4"/>
+                    <path d="M48 28 C48 14 72 14 72 28 L70 40 C70 46 50 46 50 40 Z" fill="#F28482"/>
+                </svg>`
+            },
+            {
+                id: 'cat-ears-clips',
+                image: 'image_d0f340.jpg',
+                name: 'Cute Cat Ears Hair Clips (Pair)',
+                subtitle: 'Pastel Pink & White Snap Clips',
+                price: 249,
+                category: 'accessories',
+                badge: '',
+                badgeColor: '',
+                swatches: ['#F4ACB7', '#FFFFFF'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <path d="M24 72 L38 40 L54 72 Z" fill="#FFFFFF" stroke="#F4ACB7" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="M66 72 L82 40 L96 72 Z" fill="#FFFFFF" stroke="#F4ACB7" stroke-width="4" stroke-linejoin="round"/>
+                </svg>`
+            },
+            {
+                id: 'cherry-rose-charm',
+                image: 'image_d0f2c5.jpg',
+                name: 'Cherry Rose Bag Charm / Tie',
+                subtitle: 'Twin Crimson Roses & Leaf Stem',
+                price: 299,
+                category: 'accessories',
+                badge: '',
+                badgeColor: '',
+                swatches: ['#BA181B', '#386641'],
+                art: `<svg viewBox="0 0 120 120" class="w-24 h-24 drop-shadow-xs">
+                    <path d="M60 28 Q50 56 44 74 M60 28 Q70 56 76 74" stroke="#386641" stroke-width="3.5" fill="none"/>
+                    <ellipse cx="47" cy="40" rx="12" ry="5" transform="rotate(-20 47 40)" fill="#386641"/>
+                    <ellipse cx="73" cy="40" rx="12" ry="5" transform="rotate(20 73 40)" fill="#386641"/>
+                    <circle cx="44" cy="76" r="13" fill="#BA181B"/>
+                    <circle cx="76" cy="78" r="13" fill="#BA181B"/>
+                </svg>`
+            }
+        ];
+
+        // State
+        let cart = [];
+        let activeCategory = 'all';
+        let searchQuery = '';
+        let selectedSpotlightSize = 'Deluxe (4 Stems)';
+        let selectedSpotlightPrice = 999;
+        let selectedSpotlightColor = 'Midnight Black & White';
+        let isWishlisted = false;
+        let pendingUploadTarget = null;
+        const customUploadedImages = {};
+
+        // Trigger Local Photo Upload for any Product Card, Hero, or Spotlight
+        function triggerPhotoUpload(targetId) {
+            pendingUploadTarget = targetId;
+            document.getElementById('global-photo-input').click();
+        }
+
+        // Bulk Select Multiple Local Photos at Once (Automatically matches filenames or fills products in order!)
+        function handleBulkPhotosSelected(event) {
+            const files = Array.from(event.target.files);
+            if (!files.length) return;
+            let loadedCount = 0;
+
+            files.forEach((file, idx) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const dataUrl = e.target.result;
+                    const matchedProduct = products.find(p => p.image && file.name.toLowerCase().includes(p.image.toLowerCase().replace('.jpg', '')));
+                    if (file.name.toLowerCase().includes('d10507')) {
+                        document.getElementById('hero-visual-container').innerHTML = `<img src="${dataUrl}" alt="Cozzy Knotty Yarn Showcase" class="w-full h-full object-cover rounded-2xl">`;
+                    }
+                    if (matchedProduct) {
+                        customUploadedImages[matchedProduct.id] = dataUrl;
+                        if (matchedProduct.id === 'sunflower-lily-bouquet') {
+                            document.getElementById('spotlight-visual-wrapper').innerHTML = `<img src="${dataUrl}" alt="Featured Bouquet" class="w-full h-full object-cover rounded-2xl">`;
+                        }
+                    } else if (products[idx]) {
+                        customUploadedImages[products[idx].id] = dataUrl;
+                    }
+                    loadedCount++;
+                    if (loadedCount === files.length) {
+                        renderProducts();
+                        showToast(`${loadedCount} Photos Loaded!`, 'Your crochet photos are now live on the site.');
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+            event.target.value = '';
+        }
+
+        function handlePhotoFileSelected(event) {
+            const file = event.target.files[0];
+            if (!file || !pendingUploadTarget) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const dataUrl = e.target.result;
+                if (pendingUploadTarget === 'hero') {
+                    document.getElementById('hero-visual-container').innerHTML = `
+                        <img src="${dataUrl}" alt="Cozzy Knotty Yarn Showcase" class="w-full h-full object-cover rounded-2xl">
+                    `;
+                    showToast('Hero Photo Updated', 'Your crochet showcase image is now live!');
+                } else if (pendingUploadTarget === 'spotlight') {
+                    document.getElementById('spotlight-visual-wrapper').innerHTML = `
+                        <img src="${dataUrl}" alt="Featured Crochet Bouquet" class="w-full h-full object-cover rounded-2xl">
+                    `;
+                    showToast('Spotlight Photo Updated', 'Featured masterpiece image updated!');
+                } else {
+                    customUploadedImages[pendingUploadTarget] = dataUrl;
+                    renderProducts();
+                    showToast('Product Photo Updated', 'Your real crochet photo has been placed!');
+                }
+                event.target.value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Render Products Grid
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            const filtered = products.filter(p => {
+                const matchesCat = activeCategory === 'all' || p.category === activeCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      p.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-2 py-10 text-center text-espresso/60 bg-beige/40 rounded-2xl border editorial-border">
+                        <p class="text-xs font-semibold">No crochet items matched your filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(product => {
+                const uploadedImg = customUploadedImages[product.id];
+                const visualContent = uploadedImg
+                    ? `<img src="${uploadedImg}" alt="${product.name}" class="w-full h-full object-cover">`
+                    : `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                       <div class="hidden w-full h-full items-center justify-center p-3">${product.art}</div>`;
+
+                return `
+                <div class="bg-cream rounded-2xl border editorial-border overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md transition-all group">
+                    <div>
+                        <div class="aspect-[4/4.3] bg-beige/75 relative flex flex-col items-center justify-center text-center overflow-hidden">
+                            ${product.badge ? `<span class="absolute top-2 left-2 z-10 ${product.badgeColor} text-[7.5px] font-bold px-2 py-0.5 rounded-full tracking-wider uppercase shadow-2xs">${product.badge}</span>` : ''}
+                            <button onclick="triggerPhotoUpload('${product.id}')" class="absolute bottom-2 right-2 z-10 bg-espresso/80 hover:bg-espresso text-cream text-[8px] font-semibold px-2 py-1 rounded-full opacity-90 flex items-center gap-1 transition-all" title="Replace with your local photo">
+                                <i class="fa-solid fa-camera text-[8px]"></i> Photo
+                            </button>
+                            ${visualContent}
+                        </div>
+                        <div class="p-3 pb-2">
+                            <div class="flex items-start justify-between gap-1">
+                                <h3 class="font-serif text-xs font-bold text-espresso leading-snug">${product.name}</h3>
+                                <span class="text-[11px] font-bold text-espresso shrink-0">₹${product.price.toLocaleString('en-IN')}</span>
+                            </div>
+                            <p class="text-[10px] text-espresso/65 mt-0.5 line-clamp-1">${product.subtitle}</p>
+                            <div class="flex items-center gap-1 mt-2">
+                                ${product.swatches.map(hex => `<span class="w-2.5 h-2.5 rounded-full border border-espresso/20" style="background-color:${hex}"></span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 pt-1">
+                        <button onclick="addToCart('${product.name.replace(/'/g, "\\'")}', ${product.price})" class="w-full py-2 bg-beige text-espresso rounded-xl text-[10px] font-bold hover:bg-espresso hover:text-cream transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-plus text-[9px]"></i> Add to Bag
+                        </button>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // Filter Category Pills
+        function filterProducts(category, btnEl) {
+            activeCategory = category;
+            document.querySelectorAll('.filter-pill').forEach(btn => {
+                btn.classList.remove('bg-espresso', 'text-cream');
+                btn.classList.add('bg-beige', 'text-espresso');
+            });
+            btnEl.classList.remove('bg-beige', 'text-espresso');
+            btnEl.classList.add('bg-espresso', 'text-cream');
+            renderProducts();
+        }
+
+        // Search Toggle & Filter
+        function toggleSearch() {
+            const bar = document.getElementById('search-bar');
+            const input = document.getElementById('mobile-search-input');
+            bar.classList.toggle('hidden');
+            if (!bar.classList.contains('hidden')) {
+                input.focus();
+            } else {
+                input.value = '';
+                searchQuery = '';
+                renderProducts();
+            }
+        }
+
+        function handleSearch(val) {
+            searchQuery = val;
+            document.getElementById('collections').scrollIntoView({ behavior: 'smooth' });
+            renderProducts();
+        }
+
+        // Spotlight Interactive Controls
+        function switchSpotlightView(label, iconClass, btnEl) {
+            const labelEl = document.getElementById('spotlight-view-label');
+            if (labelEl) labelEl.innerText = label;
+            const imgEl = document.getElementById('spotlight-img');
+            if (imgEl) {
+                const viewMap = {
+                    'Deluxe Bouquet View': 'image_d101ab.jpg',
+                    'White Lily & Sunflower Macro': 'image_d0f9c5.jpg',
+                    'Satin Ribbon Gift Wrap': 'image_d0f2a1.jpg'
+                };
+                if (viewMap[label]) {
+                    imgEl.style.display = 'block';
+                    imgEl.src = viewMap[label];
+                }
+                imgEl.classList.add('scale-105');
+                setTimeout(() => imgEl.classList.remove('scale-105'), 220);
+            }
+            document.querySelectorAll('.spotlight-thumb').forEach(el => {
+                el.classList.remove('border-2', 'border-terracotta');
+                el.classList.add('border', 'editorial-border');
+            });
+            btnEl.classList.remove('border', 'editorial-border');
+            btnEl.classList.add('border-2', 'border-terracotta');
+        }
+
+        function selectSize(sizeLabel, price, btnEl) {
+            selectedSpotlightSize = sizeLabel;
+            selectedSpotlightPrice = price;
+            document.getElementById('selected-size-label').innerText = sizeLabel;
+            document.getElementById('spotlight-price-display').innerText = `₹${price}`;
+            document.getElementById('spotlight-add-btn').innerHTML = `<i class="fa-solid fa-bag-shopping"></i><span>Add to Bag — ₹${price}</span>`;
+            document.querySelectorAll('.size-pill').forEach(el => {
+                el.classList.remove('bg-espresso', 'text-cream');
+                el.classList.add('bg-cream', 'text-espresso', 'border', 'editorial-border');
+            });
+            btnEl.classList.remove('bg-cream', 'text-espresso', 'border', 'editorial-border');
+            btnEl.classList.add('bg-espresso', 'text-cream');
+        }
+
+        function selectColor(colorName, hex, btnEl) {
+            selectedSpotlightColor = colorName;
+            document.getElementById('selected-color-label').innerText = colorName;
+            document.querySelectorAll('.color-swatch').forEach(el => {
+                el.classList.remove('ring-2', 'ring-offset-2', 'ring-espresso');
+            });
+            btnEl.classList.add('ring-2', 'ring-offset-2', 'ring-espresso');
+        }
+
+        function toggleWishlist() {
+            isWishlisted = !isWishlisted;
+            const icon = document.getElementById('wishlist-icon');
+            if (isWishlisted) {
+                icon.className = 'fa-solid fa-heart text-terracotta text-base';
+                showToast('Saved to Wishlist', 'Deluxe Forever Bouquet saved!');
+            } else {
+                icon.className = 'fa-regular fa-heart text-base';
+                showToast('Removed from Wishlist', 'Item removed from saved pieces.');
+            }
+        }
+
+        function addSpotlightToCart() {
+            const itemTitle = `Deluxe Forever Bouquet (${selectedSpotlightSize}, ${selectedSpotlightColor})`;
+            addToCart(itemTitle, selectedSpotlightPrice);
+        }
+
+        // Shopping Bag Functions
+        function addToCart(name, price) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+            showToast('Added to Bag', name);
+        }
+
+        function updateQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            badge.innerText = totalItems;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-14 text-espresso/55">
+                        <i class="fa-solid fa-basket-shopping text-3xl mb-3 text-terracotta/40"></i>
+                        <p class="text-xs font-semibold">Your shopping bag is empty.</p>
+                        <p class="text-[11px] mt-1">Explore handcrafted crochet pieces to add them here!</p>
+                    </div>
+                `;
+                subtotalEl.innerText = '₹0';
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            let subtotal = 0;
+            container.innerHTML = cart.map((item, idx) => {
+                subtotal += item.price * item.quantity;
+                return `
+                    <div class="flex items-center justify-between bg-beige/55 p-3.5 rounded-2xl border editorial-border gap-3">
+                        <div class="min-w-0">
+                            <h4 class="font-serif text-xs font-bold text-espresso leading-snug">${item.name}</h4>
+                            <p class="text-[11px] font-semibold text-terracotta mt-0.5">₹${item.price.toLocaleString('en-IN')} each</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 shrink-0">
+                            <button onclick="updateQuantity(${idx}, -1)" class="w-7 h-7 rounded-lg bg-cream border editorial-border text-espresso flex items-center justify-center text-xs hover:bg-espresso hover:text-cream transition-colors" aria-label="Decrease">-</button>
+                            <span class="text-xs font-bold w-5 text-center">${item.quantity}</span>
+                            <button onclick="updateQuantity(${idx}, 1)" class="w-7 h-7 rounded-lg bg-cream border editorial-border text-espresso flex items-center justify-center text-xs hover:bg-espresso hover:text-cream transition-colors" aria-label="Increase">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            subtotalEl.innerText = `₹${subtotal.toLocaleString('en-IN')}`;
+            checkoutBtn.disabled = false;
+        }
+
+        // Drawer & Modal Controls
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartContent = document.getElementById('cart-drawer-content');
+        function toggleCart(open) {
+            if (open) {
+                cartDrawer.classList.remove('hidden');
+                setTimeout(() => cartContent.classList.remove('translate-x-full'), 10);
+            } else {
+                cartContent.classList.add('translate-x-full');
+                setTimeout(() => cartDrawer.classList.add('hidden'), 300);
+            }
+        }
+
+        document.getElementById('cart-btn').addEventListener('click', () => toggleCart(true));
+        document.getElementById('close-cart-btn').addEventListener('click', () => toggleCart(false));
+        cartDrawer.addEventListener('click', e => { if (e.target === cartDrawer) toggleCart(false); });
+
+        const mobileMenu = document.getElementById('mobile-menu');
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+        document.getElementById('mobile-close-btn').addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) mobileMenu.classList.add('hidden'); });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Checkout Order Modal
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            let total = 0;
+            let summary = "Hi Bhumika! I'd like to place a custom order from Cozzy Knotty Yarn:";
+            cart.forEach(item => {
+                const lineTotal = item.price * item.quantity;
+                total += lineTotal;
+                summary += `• ${item.name} (x${item.quantity}) — ₹${lineTotal.toLocaleString('en-IN')}`;
+            });
+            summary += `Estimated Subtotal: ₹${total.toLocaleString('en-IN')}Please share color availability & shipping details!`;
+
+            document.getElementById('order-summary-text').value = summary;
+            toggleCart(false);
+            const modal = document.getElementById('order-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function copyOrderSummary() {
+            const box = document.getElementById('order-summary-text');
+            box.select();
+            box.setSelectionRange(0, 99999);
+            try {
+                document.execCommand('copy');
+                showToast('Copied to Clipboard', 'Paste your order in our Instagram DM!');
+            } catch (err) {
+                showToast('Ready to Paste', 'Copy the text box above.');
+            }
+        }
+
+        // Newsletter Form
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const input = document.getElementById('newsletter-email');
+            showToast('Welcome to the Craft Club!', `Subscribed ${input.value}`);
+            input.value = '';
+        }
+
+        // Toast Helper
+        let toastTimer;
+        function showToast(title, subtitle) {
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-subtitle').innerText = subtitle;
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-28', 'opacity-0');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('translate-y-28', 'opacity-0');
+            }, 2800);
+        }
+
+        // Toggle Mobile Frame vs Full Width on Desktop
+        function toggleViewportMode() {
+            const body = document.body;
+            const btn = document.getElementById('toggle-viewport-btn');
+            body.classList.toggle('mobile-frame-mode');
+            if (body.classList.contains('mobile-frame-mode')) {
+                btn.innerText = 'Expand Full Width';
+            } else {
+                btn.innerText = 'Mobile Phone Frame';
+            }
+        }
+
+        // Initialize
+        renderProducts();
+        updateCartUI();
+
+        // --- PRIVATE SELLER ADMIN PANEL FUNCTIONS ---
+        function toggleAdminPanel() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.toggle('hidden');
+            modal.classList.toggle('flex');
+            if (!modal.classList.contains('hidden')) {
+                renderAdminProductList();
+            }
+        }
+
+        function switchAdminTab(tab) {
+            const addTab = document.getElementById('admin-panel-add');
+            const manageTab = document.getElementById('admin-panel-manage');
+            const btnAdd = document.getElementById('admin-tab-add');
+            const btnManage = document.getElementById('admin-tab-manage');
+
+            if (tab === 'add') {
+                addTab.classList.remove('hidden');
+                manageTab.classList.add('hidden');
+                btnAdd.className = 'flex-1 py-2.5 rounded-lg bg-espresso text-cream transition-all text-center';
+                btnManage.className = 'flex-1 py-2.5 rounded-lg text-espresso hover:text-espresso transition-all text-center';
+            } else {
+                addTab.classList.add('hidden');
+                manageTab.classList.remove('hidden');
+                btnManage.className = 'flex-1 py-2.5 rounded-lg bg-espresso text-cream transition-all text-center';
+                btnAdd.className = 'flex-1 py-2.5 rounded-lg text-espresso hover:text-espresso transition-all text-center';
+                renderAdminProductList();
+            }
+        }
+
+        function handleAddNewProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('new-item-name').value;
+            const price = parseFloat(document.getElementById('new-item-price').value);
+            const category = document.getElementById('new-item-category').value;
+            const subtitle = document.getElementById('new-item-subtitle').value;
+            const fileInput = document.getElementById('new-item-image-file');
+
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const dataUrl = evt.target.result;
+                const newId = 'custom-' + Date.now();
+
+                const newProduct = {
+                    id: newId,
+                    image: '',
+                    name: name,
+                    subtitle: subtitle,
+                    price: price,
+                    category: category,
+                    badge: 'NEW DROP',
+                    badgeColor: 'bg-terracotta text-cream',
+                    swatches: ['#55125B', '#E8C5F1', '#7D2A85'],
+                    art: `<svg viewBox="0 0 120 120" class="w-24 h-24"><circle cx="60" cy="60" r="30" fill="#E8C5F1"/></svg>`
+                };
+
+                products.unshift(newProduct);
+                customUploadedImages[newId] = dataUrl;
+                renderProducts();
+                toggleAdminPanel();
+                showToast('Item Published!', `${name} is now live in your store.`);
+                e.target.reset();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderAdminProductList() {
+            const listContainer = document.getElementById('admin-product-list');
+            listContainer.innerHTML = products.map((p, index) => `
+                <div class="flex items-center justify-between bg-beige/60 p-3 rounded-xl border editorial-border gap-2">
+                    <div class="min-w-0">
+                        <h4 class="font-serif text-xs font-bold text-espresso truncate">${p.name}</h4>
+                        <p class="text-[10px] text-espresso/65 uppercase">${p.category} • ₹${p.price}</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                        <input type="number" id="admin-price-${p.id}" value="${p.price}" class="w-16 px-2 py-1 bg-cream border editorial-border rounded-lg text-xs font-bold text-espresso text-center">
+                        <button onclick="updateProductPrice('${p.id}')" class="px-2 py-1 bg-beige text-espresso text-[10px] font-bold rounded-lg hover:bg-espresso hover:text-cream transition-colors">Save</button>
+                        <button onclick="deleteProduct('${p.id}')" class="p-1.5 bg-red-100 text-red-600 rounded-lg text-xs hover:bg-red-200 transition-colors" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateProductPrice(id) {
+            const input = document.getElementById(`admin-price-${id}`);
+            const newPrice = parseFloat(input.value);
+            const prod = products.find(p => p.id === id);
+            if (prod && !isNaN(newPrice)) {
+                prod.price = newPrice;
+                renderProducts();
+                showToast('Price Updated', `${prod.name} is now ₹${newPrice}`);
+            }
+        }
+
+        function deleteProduct(id) {
+            const idx = products.findIndex(p => p.id === id);
+            if (idx !== -1) {
+                const removed = products.splice(idx, 1)[0];
+                renderProducts();
+                renderAdminProductList();
+                showToast('Item Removed', `${removed.name} removed from store.`);
+            }
+        }
+    </script>
+</body>
+</html>

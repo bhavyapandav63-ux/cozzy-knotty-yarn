@@ -1,0 +1,1 @@
+const router = require('express').Router();// TODO: seller application and shop profile endpointsmodule.exports = router;

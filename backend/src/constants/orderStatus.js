@@ -1,0 +1,1 @@
+module.exports = Object.freeze({ PENDING: 'pending', CONFIRMED: 'confirmed', SHIPPED: 'shipped', DELIVERED: 'delivered', CANCELLED: 'cancelled' });

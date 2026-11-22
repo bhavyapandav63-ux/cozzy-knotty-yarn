@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders | Cozzy Knotty Yarn</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-pink-50 min-h-screen">
+
+  <header class="bg-white p-5 shadow-sm">
+    <h1 class="text-2xl font-bold text-purple-800">
+      Cozzy Knotty Yarn 🧶
+    </h1>
+  </header>
+
+  <main class="max-w-3xl mx-auto p-6 mt-10">
+    <h2 class="text-3xl font-bold text-purple-900">My Orders</h2>
+
+    <p id="welcomeMessage" class="mt-3 text-gray-600"></p>
+
+    <div id="ordersContainer" class="mt-8 space-y-5">
+      <p class="text-gray-500">Loading your orders...</p>
+    </div>
+  </main>
+
+  <script>
+    // SESSION PROTECTION
+    const token = localStorage.getItem("authToken");
+    const user = JSON.parse(
+      localStorage.getItem("currentUser") || "null"
+    );
+
+    const ordersContainer = document.getElementById("ordersContainer");
+
+    if (!token || !user) {
+      window.location.replace("login.html");
+    } else {
+      document.getElementById("welcomeMessage").textContent =
+        `Welcome, ${user.name || "Customer"}!`;
+
+      loadMyOrders();
+    }
+
+    // LOAD CUSTOMER ORDERS
+    async function loadMyOrders() {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/orders/my-orders",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        );
+
+        const data = await response.json();
+
+        if (response.status === 401) {
+          localStorage.removeItem("authToken");
+          localStorage.removeItem("currentUser");
+          window.location.replace("login.html");
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(data.message || "Could not load orders.");
+        }
+
+        const orders = data.orders || [];
+
+        ordersContainer.innerHTML = "";
+
+        if (orders.length === 0) {
+          ordersContainer.innerHTML = `
+            <div class="bg-white rounded-2xl p-8 text-center shadow-sm">
+              <p class="text-5xl mb-4">🧶</p>
+              <h3 class="text-xl font-bold text-purple-900">
+                No orders yet!
+              </h3>
+              <p class="text-gray-500 mt-2">
+                Your orders will appear here after you place your first order.
+              </p>
+            </div>
+          `;
+          return;
+        }
+
+        orders.forEach(order => {
+          const card = document.createElement("div");
+          card.className =
+            "bg-white rounded-2xl p-6 shadow-sm border border-pink-100";
+
+          const heading = document.createElement("div");
+          heading.className =
+            "flex flex-wrap justify-between gap-3 mb-4";
+
+          const orderId = document.createElement("p");
+          orderId.className = "font-bold text-purple-900";
+          orderId.textContent = `Order #${order._id}`;
+
+          const status = document.createElement("span");
+          status.className =
+            "bg-pink-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold";
+          status.textContent = order.orderStatus || "PLACED";
+
+          heading.append(orderId, status);
+          card.appendChild(heading);
+
+          const date = document.createElement("p");
+          date.className = "text-sm text-gray-500 mb-4";
+          date.textContent = order.createdAt
+            ? `Placed on ${new Date(order.createdAt).toLocaleDateString("en-IN")}`
+            : "Order date unavailable";
+          card.appendChild(date);
+
+          (order.items || []).forEach(item => {
+            const itemRow = document.createElement("div");
+            itemRow.className =
+              "flex items-center gap-4 py-3 border-t border-pink-100";
+
+            if (item.image) {
+              const img = document.createElement("img");
+              img.src = item.image;
+              img.alt = item.name || "Product";
+              img.className =
+                "w-16 h-16 rounded-xl object-cover bg-pink-50";
+              itemRow.appendChild(img);
+            }
+
+            const details = document.createElement("div");
+            details.className = "flex-1";
+
+            const name = document.createElement("p");
+            name.className = "font-semibold text-gray-800";
+            name.textContent = item.name || "Product";
+
+            const quantity = document.createElement("p");
+            quantity.className = "text-sm text-gray-500";
+            quantity.textContent = `Quantity: ${item.quantity}`;
+
+            details.append(name, quantity);
+            itemRow.appendChild(details);
+
+            const price = document.createElement("p");
+            price.className = "font-semibold text-purple-800";
+            price.textContent =
+              `₹${Number(item.price || 0) * Number(item.quantity || 0)}`;
+
+            itemRow.appendChild(price);
+            card.appendChild(itemRow);
+          });
+
+          const total = document.createElement("p");
+          total.className =
+            "text-right text-lg font-bold text-purple-900 mt-4 border-t border-pink-100 pt-4";
+          total.textContent =
+            `Total: ₹${Number(order.totalAmount || 0).toLocaleString("en-IN")}`;
+
+          card.appendChild(total);
+
+          const payment = document.createElement("p");
+          payment.className = "text-sm text-gray-500 mt-2";
+          payment.textContent =
+            `Payment: ${order.paymentMethod || "COD"} • ${order.paymentStatus || "PENDING"}`;
+
+          card.appendChild(payment);
+          ordersContainer.appendChild(card);
+        });
+
+      } catch (error) {
+        console.error("Orders error:", error);
+
+        ordersContainer.innerHTML = `
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <p class="text-red-600 font-semibold">
+              Could not load your orders.
+            </p>
+            <p class="text-gray-500 mt-2">
+              ${error.message}
+            </p>
+          </div>
+        `;
+      }
+    }
+  </script>
+
+</body>
+</html>

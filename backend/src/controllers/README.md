@@ -1,0 +1,1 @@
+Keep HTTP controllers thin: validate input, call services and return consistent JSON responses.

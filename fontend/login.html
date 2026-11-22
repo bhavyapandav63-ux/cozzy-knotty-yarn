@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Crochet Boutique</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Croissant+One&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        crochet: {
+                            purple: "#8E1EA2",
+                            pink: "#C654C3",
+                            lightPink: "#ED96D7",
+                            cream: "#FFF4BF"
+                        }
+                    },
+                    fontFamily: {
+                        crochet: ['"Croissant One"', 'serif']
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Croissant One", serif;
+        }
+
+        .form-font {
+            font-family: Arial, sans-serif;
+        }
+
+        .left-art {
+            background:
+                radial-gradient(ellipse at 12% 16%, rgba(255,244,191,.95) 0 7%, transparent 7.5%),
+                radial-gradient(ellipse at 84% 82%, rgba(237,150,215,.45) 0 12%, transparent 12.5%),
+                linear-gradient(145deg, #FFF4BF 0%, #f9d9ef 48%, #ED96D7 100%);
+        }
+
+        .soft-blob {
+            position: absolute;
+            border-radius: 48% 52% 64% 36% / 42% 38% 62% 58%;
+            background: rgba(255,255,255,.28);
+            transform: rotate(-18deg);
+        }
+
+        .input-field {
+            width: 100%;
+            border: 1.5px solid rgba(255,244,191,.8);
+            border-radius: 999px;
+            background: rgba(255,255,255,.08);
+            color: #fff;
+            padding: 14px 18px;
+            outline: none;
+            transition: .2s;
+        }
+
+        .input-field::placeholder {
+            color: rgba(255,244,191,.58);
+        }
+
+        .input-field:focus {
+            border-color: #FFF4BF;
+            background: rgba(255,255,255,.13);
+            box-shadow: 0 0 0 3px rgba(255,244,191,.15);
+        }
+
+        @media (max-width: 640px) {
+            .login-container {
+                border-radius: 22px;
+            }
+
+            .left-section {
+                min-height: 230px;
+                padding: 30px 20px;
+            }
+
+            .logo-image {
+                width: 110px;
+                height: 110px;
+            }
+
+            .right-section {
+                padding: 35px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#f7eaf5] flex items-center justify-center p-3 sm:p-5 lg:p-8">
+
+    <main class="login-container grid w-full max-w-6xl min-h-[600px] overflow-hidden rounded-[30px] bg-crochet-purple shadow-2xl shadow-purple-950/20 lg:grid-cols-2">
+
+        <!-- Left Section -->
+        <section class="left-section left-art relative flex min-h-[260px] items-center justify-center overflow-hidden px-6 py-10 sm:min-h-[330px] lg:min-h-[600px]">
+
+            <div class="soft-blob -left-16 -top-20 h-64 w-64"></div>
+            <div class="soft-blob -bottom-24 -right-10 h-72 w-72"></div>
+
+            <div class="relative z-10 max-w-md text-center">
+
+                <!-- Logo -->
+                <div class="mb-6 flex justify-center">
+                    <img
+                        src="assets/logo.jpg
+                    "
+                        alt="Crochet Boutique Logo"
+                        class="logo-image h-36 w-36 rounded-full object-cover shadow-lg sm:h-40 sm:w-40"
+                    >
+                </div>
+
+                <h2 class="font-crochet text-3xl leading-tight text-crochet-purple sm:text-4xl">
+                    Welcome
+                </h2>
+
+                <p class="mt-4 text-xs tracking-[.22em] text-[#8E1EA2]/75 sm:text-sm">
+                    MADE WITH LOVE, STITCH BY STITCH
+                </p>
+
+                <div class="mx-auto mt-10 flex max-w-xs items-end justify-center gap-4">
+
+                    <div class="h-20 w-20 rounded-full border-[10px] border-crochet-purple/70 bg-crochet-lightPink shadow-lg"></div>
+
+                    <div class="mb-5 h-28 w-28 rounded-full border-[12px] border-crochet-pink/80 bg-crochet-cream shadow-lg"></div>
+
+                    <div class="h-16 w-16 rounded-full border-[9px] border-crochet-purple/60 bg-white/70 shadow-lg"></div>
+
+                </div>
+
+                <p class="mt-8 font-sans text-sm text-crochet-purple/80">
+                    A little handmade happiness awaits you.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Right Section -->
+        <section class="right-section flex items-center justify-center px-7 py-12 text-crochet-cream sm:px-12 lg:px-14">
+
+            <div class="w-full max-w-md">
+
+                <!-- Heading -->
+                <div class="mb-9">
+
+                    <p class="font-crochet text-3xl leading-snug sm:text-4xl">
+                        Hello!
+                    </p>
+
+                    <h1 class="mt-2 font-crochet text-2xl leading-snug sm:text-3xl">
+                        Welcome back :)
+                    </h1>
+
+                    <p class="form-font mt-3 text-sm text-crochet-cream/75">
+                        Log in to explore our handmade collection.
+                    </p>
+
+                </div>
+
+
+                <!-- Login Form -->
+                <form id="loginForm" class="form-font space-y-6" novalidate>
+
+                    <!-- Email -->
+                    <div>
+
+                        <label for="email" class="mb-2 ml-3 block text-sm font-semibold text-crochet-cream">
+                            Email Address
+                        </label>
+
+                        <input
+                            class="input-field"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                        <p id="emailError" class="mt-2 ml-3 hidden text-xs text-crochet-cream">
+                            Please enter a valid email address.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Password -->
+                    <div>
+
+                        <label for="password" class="mb-2 ml-3 block text-sm font-semibold text-crochet-cream">
+                            Password
+                        </label>
+
+                        <input
+                            class="input-field"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                            minlength="6"
+                        >
+
+                        <p id="passwordError" class="mt-2 ml-3 hidden text-xs text-crochet-cream">
+                            Password must be at least 6 characters.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Forgot Password -->
+                    <div class="flex justify-end">
+
+                        <a
+                            href="#"
+                            id="forgotPassword"
+                            class="text-sm text-crochet-cream/80 underline decoration-crochet-lightPink underline-offset-4 transition hover:text-white"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- Login Button -->
+                    <button
+                        type="submit"
+                        class="w-full rounded-full bg-crochet-cream px-6 py-4 font-semibold text-crochet-purple shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-white hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-crochet-lightPink/40"
+                    >
+                        Login
+                    </button>
+
+
+                    <!-- Message -->
+                    <p
+                        id="formMessage"
+                        role="status"
+                        aria-live="polite"
+                        class="hidden rounded-xl border border-crochet-lightPink/40 bg-white/10 px-4 py-3 text-center text-sm text-crochet-cream"
+                    ></p>
+
+                </form>
+<!-- Create Account Link -->
+<p class="mt-6 text-center text-sm text-crochet-cream">
+    Don't have an account?
+    <a
+        href="signup.html"
+        class="font-semibold text-white underline underline-offset-4 hover:text-crochet-lightPink"
+    >
+        Create Account
+    </a>
+</p>
+
+                <!-- Footer -->
+                <p class="form-font mt-9 text-center text-xs leading-relaxed text-crochet-cream/60">
+                    Handmade with care
+                    <span class="text-crochet-lightPink">♥</span>
+                    Just for you
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+
+<script>
+    const loginForm = document.getElementById("loginForm");
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+
+    const formMessage = document.getElementById("formMessage");
+
+    // Login Form + Backend Authentication
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const emailIsValid =
+            emailInput.validity.valid &&
+            emailInput.value.trim() !== "";
+
+        const passwordIsValid =
+            passwordInput.value.length >= 6;
+
+        emailError.classList.toggle("hidden", emailIsValid);
+        passwordError.classList.toggle("hidden", passwordIsValid);
+        formMessage.classList.add("hidden");
+
+        if (!emailIsValid || !passwordIsValid) {
+            if (!emailIsValid) {
+                emailInput.focus();
+            } else {
+                passwordInput.focus();
+            }
+            return;
+        }
+
+        try {
+            formMessage.textContent = "Logging in...";
+            formMessage.classList.remove("hidden");
+
+            const response = await fetch(
+                "http://localhost:5000/api/auth/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: emailInput.value.trim(),
+                        password: passwordInput.value
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok || !data.success) {
+                throw new Error(data.message || "Login failed.");
+            }
+
+            // Save login information
+            localStorage.setItem("authToken", data.token);
+            localStorage.setItem("currentUser", JSON.stringify(data.user));
+
+            formMessage.textContent = "Login successful! Welcome back.";
+            formMessage.classList.remove("hidden");
+
+            // Redirect to home page
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 1000);
+
+        } catch (error) {
+            formMessage.textContent =
+                error.message || "Unable to connect to the server.";
+
+            formMessage.classList.remove("hidden");
+        }
+    });
+
+    // Forgot Password
+    document.getElementById("forgotPassword").addEventListener("click", (event) => {
+        event.preventDefault();
+
+        formMessage.textContent =
+            "Password reset will be available soon.";
+
+        formMessage.classList.remove("hidden");
+    });
+</script>
+
+
+</body>
+
+</html>

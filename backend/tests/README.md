@@ -1,0 +1,1 @@
+Add Jest and Supertest coverage for health, auth, products, cart and orders.

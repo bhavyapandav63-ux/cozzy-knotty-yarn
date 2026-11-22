@@ -1,0 +1,1 @@
+Create Mongoose models: User, SellerProfile, Product, Category, Cart, Order and Review. Include ownership fields, timestamps and indexes where appropriate.

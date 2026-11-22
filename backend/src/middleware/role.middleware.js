@@ -1,0 +1,1 @@
+// TODO: Enforce customer/seller permissions after authentication.exports.allowRoles = (..._roles) => (_req, _res, next) => next();

@@ -1,0 +1,1 @@
+const router = require('express').Router();// TODO: GET /me, PATCH /me, address managementmodule.exports = router;

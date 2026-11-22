@@ -1,0 +1,1 @@
+const router = require('express').Router();// TODO: GET / and GET /:slugmodule.exports = router;
